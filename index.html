@@ -270,45 +270,43 @@
             scroll-behavior: smooth;
         }
 
-        /* Ajuste para el header fijo */
+        /* Ajuste para el header fijo y scroll */
         section[id] {
-            scroll-margin-top: 120px; /* Aumentado para dar más espacio */
-            scroll-padding-top: 120px; /* Asegura que el scroll se detenga con suficiente espacio */
+            scroll-margin-top: 160px; /* Aumentado significativamente para asegurar que el título sea visible */
         }
 
-        /* Aseguramos que las secciones tengan suficiente espacio superior */
+        /* Contenedor de sección con padding */
+        .section-container {
+            padding-top: 2rem;
+        }
+
+        /* Aseguramos que las secciones tengan suficiente espacio */
         #modelo-atc,
         #fases,
         #skills-camps,
         #por-que-dojo,
         #unete {
-            padding-top: 4rem; /* Aumentado el padding superior */
-            margin-top: -2rem; /* Compensación para mantener el espaciado visual */
+            position: relative;
+            padding-top: 1rem;
+        }
+
+        /* Altura fija del header */
+        header.sticky-header {
+            height: 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 50;
         }
 
         @media (max-width: 768px) {
             section[id] {
-                scroll-margin-top: 100px; /* Ajustado para móviles */
-                scroll-padding-top: 100px;
+                scroll-margin-top: 120px; /* Ajustado para móviles */
             }
-            #modelo-atc,
-            #fases,
-            #skills-camps,
-            #por-que-dojo,
-            #unete {
-                padding-top: 3rem; /* Ajustado para móviles */
-                margin-top: -1.5rem;
-            }
-        }
-
-        /* Aseguramos que el header tenga una altura fija */
-        header {
-            height: 80px; /* Altura fija para el header */
-        }
-
-        @media (max-width: 768px) {
-            header {
-                height: 70px; /* Altura fija para el header en móviles */
+            .section-container {
+                padding-top: 1.5rem;
             }
         }
 
@@ -345,7 +343,7 @@
 </head>
 <body>
 
-    <header class="bg-white shadow-md sticky top-0 z-50" role="banner">
+    <header class="bg-white shadow-md sticky-header" role="banner">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center" role="navigation" aria-label="Navegación principal">
             <a href="#" class="logo-container">
                 <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
@@ -410,143 +408,151 @@
     </section>
 
     <section id="modelo-atc" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold dark-navy mb-4">Nuestra Innovación: El Modelo <span class="primary-blue">ATC</span></h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    El <span class="font-bold primary-orange">Modelo de Aceleración de Talento Cíclico (ATC)</span> es un ecosistema de aprendizaje inspirado en el MIT y la agilidad de Silicon Valley. No es una línea recta, es una espiral de crecimiento continuo.
-                </p>
-            </div>
-
-            <div class="atc-diagram-container mb-12">
-                <div class="atc-phase phase-1">
-                    <h3>FASE 1: Ignition Bootcamp</h3>
-                    <p>Desde los fundamentos hasta tu primer proyecto real. Aprende a pensar computacionalmente y a construir con las herramientas de la industria.</p>
-                    <span class="cantera-tag">Cantera Junior</span>
+        <div class="section-container">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold dark-navy mb-4">Nuestra Innovación: El Modelo <span class="primary-blue">ATC</span></h2>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                        El <span class="font-bold primary-orange">Modelo de Aceleración de Talento Cíclico (ATC)</span> es un ecosistema de aprendizaje inspirado en el MIT y la agilidad de Silicon Valley. No es una línea recta, es una espiral de crecimiento continuo.
+                    </p>
                 </div>
-                <div class="atc-arrow hidden md:block">&rarr;</div>
-                <div class="atc-arrow md:hidden">&darr;</div>
 
-                <div class="atc-phase phase-2">
-                    <h3>FASE 2: Misión de Impacto</h3>
-                    <p>Aplica tus habilidades en proyectos reales para clientes reales. Desarrolla autonomía, profundidad técnica y lidera soluciones innovadoras.</p>
-                    <span class="cantera-tag">Cantera Senior</span>
+                <div class="atc-diagram-container mb-12">
+                    <div class="atc-phase phase-1">
+                        <h3>FASE 1: Ignition Bootcamp</h3>
+                        <p>Desde los fundamentos hasta tu primer proyecto real. Aprende a pensar computacionalmente y a construir con las herramientas de la industria.</p>
+                        <span class="cantera-tag">Cantera Junior</span>
+                    </div>
+                    <div class="atc-arrow hidden md:block">&rarr;</div>
+                    <div class="atc-arrow md:hidden">&darr;</div>
+
+                    <div class="atc-phase phase-2">
+                        <h3>FASE 2: Misión de Impacto</h3>
+                        <p>Aplica tus habilidades en proyectos reales para clientes reales. Desarrolla autonomía, profundidad técnica y lidera soluciones innovadoras.</p>
+                        <span class="cantera-tag">Cantera Senior</span>
+                    </div>
+                    <div class="atc-arrow hidden md:block">&rarr;</div>
+                    <div class="atc-arrow md:hidden">&darr;</div>
+                    
+                    <div class="atc-phase phase-3">
+                        <h3>FASE 3: Venture Lab</h3>
+                        <p>Conviértete en un líder técnico, arquitecto o fundador. Impulsa la innovación radical, mentoriza a la nueva generación y crea el futuro.</p>
+                        <span class="cantera-tag">Cantera Experto</span>
+                    </div>
                 </div>
-                <div class="atc-arrow hidden md:block">&rarr;</div>
-                <div class="atc-arrow md:hidden">&darr;</div>
                 
-                <div class="atc-phase phase-3">
-                    <h3>FASE 3: Venture Lab</h3>
-                    <p>Conviértete en un líder técnico, arquitecto o fundador. Impulsa la innovación radical, mentoriza a la nueva generación y crea el futuro.</p>
-                    <span class="cantera-tag">Cantera Experto</span>
+                <div class="feedback-loop max-w-4xl mx-auto">
+                    <h4>El Motor del Ecosistema: Ciclos de Mentoría y Creación</h4>
+                    <p class="mt-2">
+                        Lo que hace único al ATC es su naturaleza cíclica. Los talentos de las <span class="font-semibold">Canteras Senior y Experto</span> no solo avanzan, sino que <span class="primary-blue font-semibold">reinyectan su conocimiento y experiencia</span> en el sistema, mentorizando a las fases anteriores y diseñando nuevos desafíos. Es un ciclo virtuoso de aprendizaje, creación y liderazgo.
+                    </p>
                 </div>
-            </div>
-            
-            <div class="feedback-loop max-w-4xl mx-auto">
-                <h4>El Motor del Ecosistema: Ciclos de Mentoría y Creación</h4>
-                <p class="mt-2">
-                    Lo que hace único al ATC es su naturaleza cíclica. Los talentos de las <span class="font-semibold">Canteras Senior y Experto</span> no solo avanzan, sino que <span class="primary-blue font-semibold">reinyectan su conocimiento y experiencia</span> en el sistema, mentorizando a las fases anteriores y diseñando nuevos desafíos. Es un ciclo virtuoso de aprendizaje, creación y liderazgo.
-                </p>
             </div>
         </div>
     </section>
 
     <section id="fases" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold dark-navy text-center mb-12">Un Viaje <span class="primary-orange">Transformador</span>, Fase a Fase</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue">
-                    <h3 class="text-2xl font-bold primary-blue mb-3">Fase 1: Ignition Bootcamp (Junior)</h3>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> De cero a constructor. Aprender a pensar y crear.</p>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Micro-sprints de habilidades, proyecto "Sandbox" guiado, rol del instructor como Mentor-Arquitecto.</p>
-                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Junior productivo con un portafolio de un proyecto funcional y complejo.</p>
-                    <p class="mt-3 font-semibold primary-blue">Destino: Cantera de Talento Junior</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange">
-                    <h3 class="text-2xl font-bold primary-orange mb-3">Fase 2: Misión de Impacto (Senior)</h3>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Profundidad técnica, autonomía y pensamiento estratégico.</p>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Problem-Based Learning con clientes reales, squads interdisciplinarios, rol de "Senior-in-Training" y mentoría a Juniors.</p>
-                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Senior con un producto desplegado, métricas de impacto y experiencia de liderazgo.</p>
-                    <p class="mt-3 font-semibold primary-orange">Destino: Cantera de Talento Senior</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy">
-                    <h3 class="text-2xl font-bold dark-navy mb-3">Fase 3: Venture Lab (Experto)</h3>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Fomentar la innovación radical y el liderazgo de ecosistemas.</p>
-                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Desarrollo de nuevas soluciones (intra/entrepreneurship), mentoría y liderazgo del ecosistema ATC, investigación aplicada.</p>
-                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un líder tecnológico (Arquitecto, CTO, Fundador) con impacto medible.</p>
-                    <p class="mt-3 font-semibold dark-navy">Destino: Cantera de Talento Experto</p>
+        <div class="section-container">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold dark-navy text-center mb-12">Un Viaje <span class="primary-orange">Transformador</span>, Fase a Fase</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue">
+                        <h3 class="text-2xl font-bold primary-blue mb-3">Fase 1: Ignition Bootcamp (Junior)</h3>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> De cero a constructor. Aprender a pensar y crear.</p>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Micro-sprints de habilidades, proyecto "Sandbox" guiado, rol del instructor como Mentor-Arquitecto.</p>
+                        <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Junior productivo con un portafolio de un proyecto funcional y complejo.</p>
+                        <p class="mt-3 font-semibold primary-blue">Destino: Cantera de Talento Junior</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange">
+                        <h3 class="text-2xl font-bold primary-orange mb-3">Fase 2: Misión de Impacto (Senior)</h3>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Profundidad técnica, autonomía y pensamiento estratégico.</p>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Problem-Based Learning con clientes reales, squads interdisciplinarios, rol de "Senior-in-Training" y mentoría a Juniors.</p>
+                        <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Senior con un producto desplegado, métricas de impacto y experiencia de liderazgo.</p>
+                        <p class="mt-3 font-semibold primary-orange">Destino: Cantera de Talento Senior</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy">
+                        <h3 class="text-2xl font-bold dark-navy mb-3">Fase 3: Venture Lab (Experto)</h3>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Fomentar la innovación radical y el liderazgo de ecosistemas.</p>
+                        <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Desarrollo de nuevas soluciones (intra/entrepreneurship), mentoría y liderazgo del ecosistema ATC, investigación aplicada.</p>
+                        <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un líder tecnológico (Arquitecto, CTO, Fundador) con impacto medible.</p>
+                        <p class="mt-3 font-semibold dark-navy">Destino: Cantera de Talento Experto</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="skills-camps" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold dark-navy mb-4">Skills <span class="primary-orange">Camps</span></h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    Nuestros programas de inmersión diseñados meticulosamente para el desarrollo de habilidades especializadas en programación y las tecnologías digitales permiten la adopción de un enfoque de aprendizaje continuo. Estos entornos de aprendizaje intensivo están estructurados para potenciar tu espiral de aprendizaje continuo por medio de cursos acordes a las realidades del sector TI.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Programación Web -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
-                    <h3 class="text-xl font-bold primary-blue mb-3">Programación Web</h3>
-                    <p class="text-gray-700">Domina el desarrollo web moderno con HTML5, CSS3, JavaScript y los frameworks más demandados.</p>
+        <div class="section-container">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold dark-navy mb-4">Skills <span class="primary-orange">Camps</span></h2>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                        Nuestros programas de inmersión diseñados meticulosamente para el desarrollo de habilidades especializadas en programación y las tecnologías digitales permiten la adopción de un enfoque de aprendizaje continuo. Estos entornos de aprendizaje intensivo están estructurados para potenciar tu espiral de aprendizaje continuo por medio de cursos acordes a las realidades del sector TI.
+                    </p>
                 </div>
 
-                <!-- Programación Backend -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
-                    <h3 class="text-xl font-bold primary-orange mb-3">Programación Backend</h3>
-                    <p class="text-gray-700">Construye servidores robustos y APIs escalables con las tecnologías más potentes del mercado.</p>
-                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Programación Web -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
+                        <h3 class="text-xl font-bold primary-blue mb-3">Programación Web</h3>
+                        <p class="text-gray-700">Domina el desarrollo web moderno con HTML5, CSS3, JavaScript y los frameworks más demandados.</p>
+                    </div>
 
-                <!-- Ciencia de Datos -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
-                    <h3 class="text-xl font-bold dark-navy mb-3">Ciencia de Datos</h3>
-                    <p class="text-gray-700">Aprende a extraer conocimiento valioso de los datos usando estadística y machine learning.</p>
-                </div>
+                    <!-- Programación Backend -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
+                        <h3 class="text-xl font-bold primary-orange mb-3">Programación Backend</h3>
+                        <p class="text-gray-700">Construye servidores robustos y APIs escalables con las tecnologías más potentes del mercado.</p>
+                    </div>
 
-                <!-- Análisis de Datos -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
-                    <h3 class="text-xl font-bold primary-blue mb-3">Análisis de Datos</h3>
-                    <p class="text-gray-700">Transforma datos en insights accionables para la toma de decisiones empresariales.</p>
-                </div>
+                    <!-- Ciencia de Datos -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
+                        <h3 class="text-xl font-bold dark-navy mb-3">Ciencia de Datos</h3>
+                        <p class="text-gray-700">Aprende a extraer conocimiento valioso de los datos usando estadística y machine learning.</p>
+                    </div>
 
-                <!-- Ciberseguridad -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
-                    <h3 class="text-xl font-bold primary-orange mb-3">Ciberseguridad</h3>
-                    <p class="text-gray-700">Protege sistemas y datos con las últimas técnicas en seguridad informática.</p>
-                </div>
+                    <!-- Análisis de Datos -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
+                        <h3 class="text-xl font-bold primary-blue mb-3">Análisis de Datos</h3>
+                        <p class="text-gray-700">Transforma datos en insights accionables para la toma de decisiones empresariales.</p>
+                    </div>
 
-                <!-- Innovación y Emprendimiento Digital -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
-                    <h3 class="text-xl font-bold dark-navy mb-3">Innovación y Emprendimiento Digital</h3>
-                    <p class="text-gray-700">Desarrolla las habilidades necesarias para liderar la transformación digital y crear startups exitosas.</p>
+                    <!-- Ciberseguridad -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
+                        <h3 class="text-xl font-bold primary-orange mb-3">Ciberseguridad</h3>
+                        <p class="text-gray-700">Protege sistemas y datos con las últimas técnicas en seguridad informática.</p>
+                    </div>
+
+                    <!-- Innovación y Emprendimiento Digital -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
+                        <h3 class="text-xl font-bold dark-navy mb-3">Innovación y Emprendimiento Digital</h3>
+                        <p class="text-gray-700">Desarrolla las habilidades necesarias para liderar la transformación digital y crear startups exitosas.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="por-que-dojo" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold dark-navy mb-12">¿Por qué Dojo SkillCamp? <span class="primary-blue">El Filo Innovador</span>.</h2>
-            <div class="grid md:grid-cols-3 gap-8 text-left">
-                <div class="p-6">
-                    <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.37 3.414-1.414 3.414H4.828c-1.784 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    <h3 class="text-xl font-bold dark-navy mb-2">Filosofía MIT "Mens et Manus"</h3>
-                    <p class="text-gray-700">Integramos mente y mano. Aprendes haciendo, construyendo y resolviendo problemas del mundo real, no solo consumiendo teoría.</p>
-                </div>
-                <div class="p-6">
-                    <svg class="w-12 h-12 primary-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    <h3 class="text-xl font-bold dark-navy mb-2">Agilidad de Silicon Valley</h3>
-                    <p class="text-gray-700">Adoptamos la velocidad, la iteración y la mentalidad de "fallar rápido, aprender más rápido". Te preparamos para un entorno de alta exigencia.</p>
-                </div>
-                <div class="p-6">
-                    <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <h3 class="text-xl font-bold dark-navy mb-2">Comunidad y Ecosistema</h3>
-                    <p class="text-gray-700">No estás solo. Te unes a una "Cantera" de talento, una red de mentores, colaboradores y futuros líderes. El aprendizaje es colectivo.</p>
+        <div class="section-container">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold dark-navy mb-12">¿Por qué Dojo SkillCamp? <span class="primary-blue">El Filo Innovador</span>.</h2>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="p-6">
+                        <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.37 3.414-1.414 3.414H4.828c-1.784 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        <h3 class="text-xl font-bold dark-navy mb-2">Filosofía MIT "Mens et Manus"</h3>
+                        <p class="text-gray-700">Integramos mente y mano. Aprendes haciendo, construyendo y resolviendo problemas del mundo real, no solo consumiendo teoría.</p>
+                    </div>
+                    <div class="p-6">
+                        <svg class="w-12 h-12 primary-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="text-xl font-bold dark-navy mb-2">Agilidad de Silicon Valley</h3>
+                        <p class="text-gray-700">Adoptamos la velocidad, la iteración y la mentalidad de "fallar rápido, aprender más rápido". Te preparamos para un entorno de alta exigencia.</p>
+                    </div>
+                    <div class="p-6">
+                        <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <h3 class="text-xl font-bold dark-navy mb-2">Comunidad y Ecosistema</h3>
+                        <p class="text-gray-700">No estás solo. Te unes a una "Cantera" de talento, una red de mentores, colaboradores y futuros líderes. El aprendizaje es colectivo.</p>
+                    </div>
                 </div>
             </div>
         </div>
