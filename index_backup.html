@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dojo SkillCamp - Programa de formación digital que transforma talento en líderes tecnológicos a través del Modelo de Aceleración de Talento Cíclico (ATC).">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/images/dojo-skillscamp.jpg">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Dojo SkillCamp - Forjando el Futuro del Talento Digital">
+    <meta property="og:description" content="Programa de formación digital que transforma talento en líderes tecnológicos.">
+    <meta property="og:image" content="./assets/images/dojo-skillscamp.jpg">
+    <meta property="og:url" content="">
+    
+    <title>Dojo SkillCamp - Forjando el Futuro del Talento Digital</title>
+    
+    <!-- Estilos locales de respaldo por si falla CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.9/dist/typography.min.css">
+    <link rel="stylesheet" href="./assets/css/tailwind-backup.css">
+    
+    <!-- Tailwind CSS con fallback -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Fallback para Tailwind CSS
+        window.addEventListener('error', function(e) {
+            if (e.target.src && e.target.src.includes('tailwindcss')) {
+                document.querySelector('link[href="./assets/css/tailwind-backup.css"]').removeAttribute('disabled');
+            }
+        }, true);
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDFDFD; /* Slightly off-white like the logo background */
+        }
+        .hero-bg {
+            background-color: #001E3C; /* Dark Navy from logo text */
+        }
+        .primary-orange { color: #F37021; }
+        .bg-primary-orange { background-color: #F37021; }
+        .primary-blue { color: #34A8DB; }
+        .bg-primary-blue { background-color: #34A8DB; }
+        .dark-navy { color: #001E3C; }
+        .bg-dark-navy { background-color: #001E3C; }
+
+        .logo-font {
+            font-weight: 900; /* Heavy for "Dojo" */
+        }
+        .tagline-font {
+            font-weight: 600; /* Semi-bold for "SkillsCamp" */
+        }
+
+        /* Logo image styling */
+        .logo-img {
+            width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .atc-diagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .atc-phase {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .atc-phase:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .atc-phase h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .atc-phase p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .atc-phase .cantera-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .phase-1 { background-color: #EBF8FF; border: 2px solid #34A8DB; } /* Light blue with blue border */
+        .phase-1 h3 { color: #34A8DB; }
+        .phase-1 .cantera-tag { background-color: #34A8DB; color: white; }
+
+        .phase-2 { background-color: #FFF5EB; border: 2px solid #F37021; } /* Light orange with orange border */
+        .phase-2 h3 { color: #F37021; }
+        .phase-2 .cantera-tag { background-color: #F37021; color: white; }
+
+        .phase-3 { background-color: #E6E9ED; border: 2px solid #001E3C; } /* Light navy/grey with dark navy border */
+        .phase-3 h3 { color: #001E3C; }
+        .phase-3 .cantera-tag { background-color: #001E3C; color: white; }
+
+        .atc-arrow {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #001E3C; /* Dark Navy */
+            transform: rotate(90deg);
+        }
+        
+        @media (min-width: 768px) {
+            .atc-diagram-container {
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start; /* Align items at the start for varying heights */
+            }
+            .atc-arrow {
+                transform: rotate(0deg);
+                margin-top: 60px; /* Adjust to vertically center with phase boxes */
+            }
+            .atc-phase {
+                width: 30%;
+            }
+        }
+        .feedback-loop {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            border-left: 5px solid #F37021;
+        }
+        .feedback-loop h4 {
+            color: #001E3C;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .feedback-loop p {
+            color: #2C3E50;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon { /* Recreating the D icon with divs and Tailwind */
+            width: 50px;
+            height: 50px;
+            position: relative;
+            margin-right: 10px;
+        }
+        .logo-icon-part1 { /* Orange part */
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 70%;
+            height: 100%;
+            background-color: #F37021;
+            border-radius: 0 0.5rem 0.5rem 0; /* Rounded right corners */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 30% 50%);
+        }
+        .logo-icon-part2 { /* Blue part */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 100%;
+            background-color: #34A8DB;
+            border-radius: 0.5rem 0 0 0.5rem; /* Rounded left corners */
+            clip-path: polygon(0 0, 70% 25%, 70% 75%, 0 100%);
+        }
+         .logo-icon-arrow { /* White arrow shape approximation */
+            position: absolute;
+            top: 50%;
+            left: 35%;
+            width: 30%;
+            height: 20%;
+            background-color: #FDFDFD;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
+            transform: translateY(-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header class="bg-white shadow-md sticky top-0 z-50" role="banner">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center" role="navigation" aria-label="Navegación principal">
+            <a href="#" class="logo-container">
+                <img src="dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img">
+            </a>
+            <div class="space-x-4">
+                <a href="#modelo-atc" class="dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
+                <a href="#fases" class="dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
+                <a href="#por-que-dojo" class="dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
+                <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold">Únete Ahora</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="primary-orange">Revoluciona</span> tu Carrera. <span class="primary-blue">Domina</span> el Futuro Digital.
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+                En Dojo SkillCamp, no solo aprendes código, te transformas en un creador de impacto. Descubre nuestro Modelo de Aceleración de Talento Cíclico (ATC) y forja tu camino desde Novato hasta Experto.
+            </p>
+            <a href="#unete" class="bg-primary-orange text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Inicia tu Transformación</a>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold dark-navy mb-4">La Brecha es Real. La Solución es <span class="primary-orange">Radical</span>.</h2>
+            <p class="text-gray-700 max-w-2xl mx-auto">
+                La industria digital necesita más que solo programadores; demanda innovadores, solucionadores de problemas y líderes técnicos. Los modelos tradicionales no bastan. Es hora de un cambio de paradigma.
+            </p>
+        </div>
+    </section>
+
+    <section id="modelo-atc" class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold dark-navy mb-4">Nuestra Innovación: El Modelo <span class="primary-blue">ATC</span></h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    El <span class="font-bold primary-orange">Modelo de Aceleración de Talento Cíclico (ATC)</span> es un ecosistema de aprendizaje inspirado en el MIT y la agilidad de Silicon Valley. No es una línea recta, es una espiral de crecimiento continuo.
+                </p>
+            </div>
+
+            <div class="atc-diagram-container mb-12">
+                <div class="atc-phase phase-1">
+                    <h3>FASE 1: Ignition Bootcamp</h3>
+                    <p>Desde los fundamentos hasta tu primer proyecto real. Aprende a pensar computacionalmente y a construir con las herramientas de la industria.</p>
+                    <span class="cantera-tag">Cantera Junior</span>
+                </div>
+                <div class="atc-arrow hidden md:block">&rarr;</div>
+                <div class="atc-arrow md:hidden">&darr;</div>
+
+                <div class="atc-phase phase-2">
+                    <h3>FASE 2: Misión de Impacto</h3>
+                    <p>Aplica tus habilidades en proyectos reales para clientes reales. Desarrolla autonomía, profundidad técnica y lidera soluciones innovadoras.</p>
+                    <span class="cantera-tag">Cantera Senior</span>
+                </div>
+                <div class="atc-arrow hidden md:block">&rarr;</div>
+                <div class="atc-arrow md:hidden">&darr;</div>
+                
+                <div class="atc-phase phase-3">
+                    <h3>FASE 3: Venture Lab</h3>
+                    <p>Conviértete en un líder técnico, arquitecto o fundador. Impulsa la innovación radical, mentoriza a la nueva generación y crea el futuro.</p>
+                    <span class="cantera-tag">Cantera Experto</span>
+                </div>
+            </div>
+            
+            <div class="feedback-loop max-w-4xl mx-auto">
+                <h4>El Motor del Ecosistema: Ciclos de Mentoría y Creación</h4>
+                <p class="mt-2">
+                    Lo que hace único al ATC es su naturaleza cíclica. Los talentos de las <span class="font-semibold">Canteras Senior y Experto</span> no solo avanzan, sino que <span class="primary-blue font-semibold">reinyectan su conocimiento y experiencia</span> en el sistema, mentorizando a las fases anteriores y diseñando nuevos desafíos. Es un ciclo virtuoso de aprendizaje, creación y liderazgo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fases" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold dark-navy text-center mb-12">Un Viaje <span class="primary-orange">Transformador</span>, Fase a Fase</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue">
+                    <h3 class="text-2xl font-bold primary-blue mb-3">Fase 1: Ignition Bootcamp (Junior)</h3>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> De cero a constructor. Aprender a pensar y crear.</p>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Micro-sprints de habilidades, proyecto "Sandbox" guiado, rol del instructor como Mentor-Arquitecto.</p>
+                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Junior productivo con un portafolio de un proyecto funcional y complejo.</p>
+                    <p class="mt-3 font-semibold primary-blue">Destino: Cantera de Talento Junior</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange">
+                    <h3 class="text-2xl font-bold primary-orange mb-3">Fase 2: Misión de Impacto (Senior)</h3>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Profundidad técnica, autonomía y pensamiento estratégico.</p>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Problem-Based Learning con clientes reales, squads interdisciplinarios, rol de "Senior-in-Training" y mentoría a Juniors.</p>
+                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un Senior con un producto desplegado, métricas de impacto y experiencia de liderazgo.</p>
+                    <p class="mt-3 font-semibold primary-orange">Destino: Cantera de Talento Senior</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy">
+                    <h3 class="text-2xl font-bold dark-navy mb-3">Fase 3: Venture Lab (Experto)</h3>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Objetivo:</strong> Fomentar la innovación radical y el liderazgo de ecosistemas.</p>
+                    <p class="text-gray-700 mb-2"><strong class="dark-navy">Metodología:</strong> Desarrollo de nuevas soluciones (intra/entrepreneurship), mentoría y liderazgo del ecosistema ATC, investigación aplicada.</p>
+                    <p class="text-gray-700"><strong class="dark-navy">Resultado:</strong> Un líder tecnológico (Arquitecto, CTO, Fundador) con impacto medible.</p>
+                    <p class="mt-3 font-semibold dark-navy">Destino: Cantera de Talento Experto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="por-que-dojo" class="py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold dark-navy mb-12">¿Por qué Dojo SkillCamp? <span class="primary-blue">El Filo Innovador</span>.</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="p-6">
+                    <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.37 3.414-1.414 3.414H4.828c-1.784 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    <h3 class="text-xl font-bold dark-navy mb-2">Filosofía MIT "Mens et Manus"</h3>
+                    <p class="text-gray-700">Integramos mente y mano. Aprendes haciendo, construyendo y resolviendo problemas del mundo real, no solo consumiendo teoría.</p>
+                </div>
+                <div class="p-6">
+                    <svg class="w-12 h-12 primary-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h3 class="text-xl font-bold dark-navy mb-2">Agilidad de Silicon Valley</h3>
+                    <p class="text-gray-700">Adoptamos la velocidad, la iteración y la mentalidad de "fallar rápido, aprender más rápido". Te preparamos para un entorno de alta exigencia.</p>
+                </div>
+                <div class="p-6">
+                    <svg class="w-12 h-12 primary-orange mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <h3 class="text-xl font-bold dark-navy mb-2">Comunidad y Ecosistema</h3>
+                    <p class="text-gray-700">No estás solo. Te unes a una "Cantera" de talento, una red de mentores, colaboradores y futuros líderes. El aprendizaje es colectivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold dark-navy mb-4">Aprende Donde Quieras, Como Quieras.</h2>
+            <p class="text-gray-700 max-w-2xl mx-auto mb-8">
+                Nuestro modelo ATC es flexible y se adapta a tus necesidades. Elige la modalidad que mejor se ajuste a tu vida y objetivos:
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold primary-blue mb-2">Presencial</h3>
+                    <p class="text-gray-600">Inmersión total en nuestros "Estudios" físicos. Colaboración cara a cara y aprendizaje por ósmosis.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold primary-orange mb-2">Virtual</h3>
+                    <p class="text-gray-600">Acceso global a través de nuestra plataforma digital integrada. Disciplina y colaboración remota de primer nivel.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold dark-navy mb-2">Híbrida</h3>
+                    <p class="text-gray-600">Lo mejor de ambos mundos. Flexibilidad remota con momentos presenciales de alto impacto para la colaboración crítica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="unete" class="py-20 bg-dark-navy text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">¿Listo para <span class="primary-orange">Forjar tu Futuro</span>?</h2>
+            <p class="text-lg mb-8 max-w-xl mx-auto">
+                No esperes más. El mundo digital te necesita. Únete a Dojo SkillCamp y conviértete en el profesional que la industria está buscando.
+            </p>
+            <a href="#" class="bg-primary-orange text-white px-10 py-4 rounded-full text-xl font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Aplica Ahora y Transforma tu Carrera</a>
+            <p class="mt-6 text-sm">Plazas limitadas. ¡No te quedes fuera de la revolución del talento!</p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-100 text-gray-700 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4">
+                <a href="#" class="logo-container inline-flex items-center justify-center">
+                    <img src="dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img">
+                </a>
+            </div>
+            <div class="space-x-6 mb-4">
+                <a href="#" class="hover:primary-orange">Sobre Nosotros</a>
+                <a href="#" class="hover:primary-orange">Programas</a>
+                <a href="#" class="hover:primary-orange">Contacto</a>
+                <a href="#" class="hover:primary-orange">Política de Privacidad</a>
+            </div>
+            <p class="text-sm">&copy; 2025 Dojo SkillCamp. Todos los derechos reservados. Forjando el futuro, un skill a la vez.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

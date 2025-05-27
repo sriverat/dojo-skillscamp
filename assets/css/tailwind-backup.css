@@ -1,0 +1,32 @@
+/* Estilos básicos de respaldo por si falla Tailwind CDN */
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.grid { display: grid; }
+.hidden { display: none; }
+.rounded-full { border-radius: 9999px; }
+.shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.bg-white { background-color: white; }
+.text-white { color: white; }
+.font-bold { font-weight: 700; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.space-x-4 > * + * { margin-left: 1rem; }
+
+/* Colores personalizados */
+.primary-orange { color: #F37021; }
+.bg-primary-orange { background-color: #F37021; }
+.primary-blue { color: #34A8DB; }
+.bg-primary-blue { background-color: #34A8DB; }
+.dark-navy { color: #001E3C; }
+.bg-dark-navy { background-color: #001E3C; }
+
+/* Responsive */
+@media (min-width: 768px) {
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:hidden { display: none; }
+    .md\:block { display: block; }
+} 
