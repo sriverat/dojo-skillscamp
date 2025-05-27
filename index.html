@@ -200,24 +200,61 @@
             transform: translateY(-50%);
         }
 
-        /* Estilos para menú móvil */
+        /* Estilos para el botón hamburguesa */
+        .hamburger {
+            display: none; /* Se mostrará solo en móvil */
+            background: none;
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+            width: 44px; /* Área de toque mínima recomendada */
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background-color: rgba(243, 112, 33, 0.1);
+        }
+
+        .hamburger svg {
+            width: 24px;
+            height: 24px;
+            color: #001E3C;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Estilos del menú móvil mejorados */
         .mobile-menu {
             display: none;
             position: fixed;
             top: 0;
             right: -100%;
-            width: 80%;
+            width: 85%;
+            max-width: 400px;
             height: 100vh;
+            height: 100dvh; /* Soporte para altura dinámica en móviles modernos */
             background-color: white;
             padding: 5rem 2rem 2rem;
             transition: all 0.3s ease-in-out;
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1001;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-menu.active {
             right: 0;
+            visibility: visible;
         }
 
         .mobile-menu-links {
@@ -227,17 +264,21 @@
         }
 
         .mobile-menu-links a {
-            display: block;
-            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
             font-size: 1.1rem;
             color: #001E3C;
-            border-radius: 8px;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
-        .mobile-menu-links a:hover {
+        .mobile-menu-links a:hover,
+        .mobile-menu-links a:focus {
             background-color: rgba(243, 112, 33, 0.1);
             color: #F37021;
+            transform: translateX(5px);
         }
 
         .mobile-menu-links a.cta-button {
@@ -246,11 +287,14 @@
             text-align: center;
             margin-top: 1rem;
             font-weight: 600;
+            justify-content: center;
         }
 
-        .mobile-menu-links a.cta-button:hover {
+        .mobile-menu-links a.cta-button:hover,
+        .mobile-menu-links a.cta-button:focus {
             background-color: #e65d0f;
             color: white;
+            transform: translateY(-2px);
         }
 
         .mobile-menu-close {
@@ -259,9 +303,20 @@
             right: 1.5rem;
             background: none;
             border: none;
-            padding: 0.5rem;
+            padding: 0.75rem;
             cursor: pointer;
             z-index: 1002;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background-color: rgba(243, 112, 33, 0.1);
         }
 
         .mobile-menu-close svg {
@@ -281,9 +336,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
+            height: 100dvh;
             background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -299,7 +356,7 @@
                 display: none;
             }
             .hamburger {
-                display: block;
+                display: flex; /* Mostrar hamburguesa en móvil */
             }
             .sticky-header {
                 height: 60px;
@@ -310,6 +367,10 @@
             .logo-img {
                 width: 120px;
                 max-height: 40px;
+            }
+            .mobile-menu {
+                display: block; /* Siempre presente pero fuera de la vista */
+                visibility: hidden; /* Oculto inicialmente */
             }
         }
 
@@ -379,27 +440,6 @@
             margin: 0 auto;
         }
 
-        /* Estilos para el botón hamburguesa */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .hamburger svg {
-            width: 24px;
-            height: 24px;
-            color: #001E3C;
-            transition: transform 0.3s ease;
-        }
-
-        .hamburger:hover svg {
-            transform: scale(1.1);
-        }
-
         /* Estilos del menú desktop */
         .desktop-menu {
             display: flex;
@@ -465,32 +505,25 @@
             }
         }
 
-        /* Fix para el scroll en iOS */
-        html, body {
-            overflow-x: hidden;
-            position: relative;
-            height: 100%;
-        }
-
-        /* Prevención de FOUC */
-        .no-fouc {
-            visibility: hidden;
+        /* Fix para el scroll en iOS y Android */
+        html {
+            height: -webkit-fill-available;
         }
         
-        .fouc-ready {
-            visibility: visible;
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Mejora de rendimiento para animaciones */
-        .mobile-menu,
-        .mobile-menu-overlay,
-        .nav-link,
-        .hamburger svg,
-        .mobile-menu-close svg {
-            will-change: transform, opacity;
+        /* Fix para el focus visible */
+        :focus-visible {
+            outline: 2px solid #F37021;
+            outline-offset: 2px;
         }
 
-        /* Fix para el z-index stacking context */
+        /* Fix para el z-index y transformaciones */
         .sticky-header {
             position: fixed;
             top: 0;
@@ -501,6 +534,58 @@
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             backface-visibility: hidden;
+            will-change: transform;
+        }
+
+        /* Fix para el menú móvil en landscape */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .mobile-menu {
+                padding-top: 3rem;
+            }
+            .mobile-menu-links {
+                gap: 0.75rem;
+            }
+            .mobile-menu-links a {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* Fix para dispositivos táctiles */
+        @media (hover: none) {
+            .nav-link:hover,
+            .hamburger:hover,
+            .mobile-menu-close:hover {
+                transform: none !important;
+            }
+        }
+
+        /* Fix para el rendimiento de las animaciones */
+        .mobile-menu,
+        .mobile-menu-overlay,
+        .nav-link,
+        .hamburger,
+        .mobile-menu-close {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        /* Fix para el contraste y legibilidad */
+        .nav-link {
+            font-weight: 500;
+            text-shadow: 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        .nav-link.cta-button {
+            text-shadow: none;
+        }
+
+        /* Prevención de FOUC */
+        .no-fouc {
+            visibility: hidden;
+        }
+        
+        .fouc-ready {
+            visibility: visible;
         }
 
     </style>
@@ -523,30 +608,30 @@
             </nav>
 
             <!-- Botón Hamburguesa -->
-            <button class="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="mobileMenu">
+            <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
 
             <!-- Overlay para menú móvil -->
-            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
 
             <!-- Menú Móvil -->
-            <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
+            <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
                 <button class="mobile-menu-close" aria-label="Cerrar menú">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <nav class="mobile-menu-links">
-                    <a href="#modelo-atc">El Modelo ATC</a>
-                    <a href="#fases">Fases</a>
-                    <a href="#skills-camps">Skills Camps</a>
-                    <a href="#por-que-dojo">¿Por qué Dojo?</a>
-                    <a href="#unete" class="cta-button">Únete Ahora</a>
-                </nav>
-            </div>
+                <div class="mobile-menu-links">
+                    <a href="#modelo-atc" role="menuitem">El Modelo ATC</a>
+                    <a href="#fases" role="menuitem">Fases</a>
+                    <a href="#skills-camps" role="menuitem">Skills Camps</a>
+                    <a href="#por-que-dojo" role="menuitem">¿Por qué Dojo?</a>
+                    <a href="#unete" class="cta-button" role="menuitem">Únete Ahora</a>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -774,7 +859,7 @@
     </footer>
 
     <script>
-        // Prevención de FOUC
+        // Prevención de FOUC y manejo de carga
         document.documentElement.classList.add('no-fouc');
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -791,6 +876,23 @@
             const closeButton = document.querySelector('.mobile-menu-close');
             let isAnimating = false;
 
+            // Fix para el scroll en iOS
+            function lockScroll() {
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+                document.body.style.top = `-${window.scrollY}px`;
+            }
+
+            function unlockScroll() {
+                const scrollY = document.body.style.top;
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+                document.body.style.top = '';
+                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            }
+
             function toggleMobileMenu() {
                 if (isAnimating) return;
                 isAnimating = true;
@@ -798,13 +900,28 @@
                 const isOpen = mobileMenu.classList.contains('active');
                 mobileMenu.classList.toggle('active');
                 overlay.classList.toggle('active');
-                document.body.style.overflow = isOpen ? '' : 'hidden';
+                
+                if (isOpen) {
+                    unlockScroll();
+                } else {
+                    lockScroll();
+                }
+
                 hamburger.setAttribute('aria-expanded', !isOpen);
+                mobileMenu.setAttribute('aria-hidden', isOpen);
+                overlay.setAttribute('aria-hidden', isOpen);
+
+                // Manejar el foco
+                if (!isOpen) {
+                    setTimeout(() => {
+                        closeButton.focus();
+                    }, 100);
+                }
 
                 // Restablecer isAnimating después de la animación
                 setTimeout(() => {
                     isAnimating = false;
-                }, 300); // Coincide con la duración de la transición CSS
+                }, 300);
             }
 
             // Manejo de teclas para accesibilidad
@@ -814,35 +931,39 @@
                 }
             }
 
+            // Trap focus dentro del menú móvil
+            function trapFocus(e) {
+                if (!mobileMenu.classList.contains('active')) return;
+
+                const focusableElements = mobileMenu.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                const firstFocusable = focusableElements[0];
+                const lastFocusable = focusableElements[focusableElements.length - 1];
+
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusable) {
+                            lastFocusable.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusable) {
+                            firstFocusable.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            }
+
             // Event listeners
             hamburger.addEventListener('click', toggleMobileMenu);
             closeButton.addEventListener('click', toggleMobileMenu);
             overlay.addEventListener('click', toggleMobileMenu);
             document.addEventListener('keydown', handleEscKey);
+            mobileMenu.addEventListener('keydown', trapFocus);
 
-            // Prevenir scroll cuando el menú está abierto en iOS
-            mobileMenu.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-
-            // Cerrar menú al hacer click en un enlace
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const href = link.getAttribute('href');
-                    toggleMobileMenu();
-                    
-                    // Esperar a que se cierre el menú antes de navegar
-                    setTimeout(() => {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }, 300);
-                });
-            });
-
-            // Optimización del resize handler
+            // Optimización del resize handler con debounce
             let resizeTimeout;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimeout);
@@ -854,44 +975,24 @@
                 }, 100);
             });
 
-            // Optimización del scroll handler
+            // Optimización del scroll handler con throttle
             let scrollTimeout;
+            let lastScrollTime = 0;
+            const throttleDelay = 100;
+
             function optimizedScrollHandler() {
-                if (!scrollTimeout) {
-                    scrollTimeout = setTimeout(() => {
-                        setActiveSection();
-                        scrollTimeout = null;
-                    }, 100);
+                const now = Date.now();
+                if (now - lastScrollTime >= throttleDelay) {
+                    setActiveSection();
+                    lastScrollTime = now;
                 }
-            }
-
-            // Manejo de sección activa mejorado
-            function setActiveSection() {
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('.nav-link');
-                const scrollPosition = window.scrollY + 100;
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    const sectionId = section.getAttribute('id');
-
-                    if (scrollPosition >= sectionTop && scrollPosition < (sectionTop + sectionHeight)) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${sectionId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
             }
 
             // Event Listeners optimizados
             window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
             window.addEventListener('load', setActiveSection);
 
-            // Intersection Observer para lazy loading de imágenes
+            // Intersection Observer para lazy loading
             if ('IntersectionObserver' in window) {
                 const imageObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
@@ -900,16 +1001,43 @@
                             if (img.dataset.src) {
                                 img.src = img.dataset.src;
                                 img.removeAttribute('data-src');
+                                observer.unobserve(img);
                             }
-                            observer.unobserve(img);
                         }
                     });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.1
                 });
 
                 document.querySelectorAll('img[data-src]').forEach(img => {
                     imageObserver.observe(img);
                 });
             }
+
+            // Manejo de enlaces del menú móvil
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    toggleMobileMenu();
+                    
+                    // Navegar después de cerrar el menú
+                    setTimeout(() => {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const headerOffset = 70;
+                            const elementPosition = target.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 300);
+                });
+            });
         });
     </script>
 
