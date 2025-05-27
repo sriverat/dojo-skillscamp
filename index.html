@@ -242,9 +242,9 @@
             width: 85%;
             max-width: 400px;
             height: 100vh;
-            height: 100dvh; /* Soporte para altura dinámica en móviles modernos */
+            height: 100dvh;
             background-color: white;
-            padding: 5rem 2rem 2rem;
+            padding: 5rem 1.5rem 2rem;
             transition: all 0.3s ease-in-out;
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1001;
@@ -260,18 +260,20 @@
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .mobile-menu-links a {
             display: flex;
             align-items: center;
             padding: 1rem 1.25rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #001E3C;
             border-radius: 12px;
             transition: all 0.3s ease;
             font-weight: 500;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
         }
 
         .mobile-menu-links a:hover,
@@ -279,6 +281,7 @@
             background-color: rgba(243, 112, 33, 0.1);
             color: #F37021;
             transform: translateX(5px);
+            border-color: #F37021;
         }
 
         .mobile-menu-links a.cta-button {
@@ -288,6 +291,8 @@
             margin-top: 1rem;
             font-weight: 600;
             justify-content: center;
+            border: none;
+            padding: 1.25rem;
         }
 
         .mobile-menu-links a.cta-button:hover,
@@ -371,6 +376,33 @@
             .mobile-menu {
                 display: block; /* Siempre presente pero fuera de la vista */
                 visibility: hidden; /* Oculto inicialmente */
+            }
+            .hero-cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+                min-width: 200px;
+                max-width: 90%;
+                white-space: normal;
+                padding: 1rem 2rem;
+                line-height: 1.3;
+                height: auto;
+                font-size: 1.1rem;
+            }
+            .main-cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+                min-width: 200px;
+                max-width: 90%;
+                white-space: normal;
+                padding: 1rem 2rem;
+                line-height: 1.3;
+                height: auto;
+                font-size: 1.1rem;
+                margin: 1rem auto;
             }
         }
 
@@ -643,7 +675,9 @@
             <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 En Dojo SkillCamp, no solo aprendes código, te transformas en un creador de impacto. Descubre nuestro Modelo de Aceleración de Talento Cíclico (ATC) y forja tu camino desde Novato hasta Experto.
             </p>
-            <a href="#unete" class="bg-primary-orange text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Inicia tu Transformación</a>
+            <a href="#unete" class="hero-cta bg-primary-orange text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                Inicia tu Transformación
+            </a>
         </div>
     </section>
 
@@ -836,7 +870,9 @@
             <p class="text-lg mb-8 max-w-xl mx-auto">
                 No esperes más. El mundo digital te necesita. Únete a Dojo SkillCamp y conviértete en el profesional que la industria está buscando.
             </p>
-            <a href="#" class="bg-primary-orange text-white px-10 py-4 rounded-full text-xl font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Aplica Ahora y Transforma tu Carrera</a>
+            <a href="#" class="main-cta bg-primary-orange text-white rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                Aplica Ahora y Transforma tu Carrera
+            </a>
             <p class="mt-6 text-sm">Plazas limitadas. ¡No te quedes fuera de la revolución del talento!</p>
         </div>
     </section>
