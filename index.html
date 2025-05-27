@@ -206,14 +206,14 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 80%; /* Aumentado para mejor usabilidad */
+            width: 80%;
             height: 100vh;
             background-color: white;
-            padding: 4rem 2rem 2rem; /* Aumentado padding superior para el botón de cierre */
-            transition: right 0.3s ease-in-out;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            z-index: 1001; /* Asegura que esté por encima del overlay */
-            overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+            padding: 5rem 2rem 2rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
@@ -223,35 +223,56 @@
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
-            gap: 2rem; /* Aumentado para mejor espaciado */
+            gap: 1.5rem;
         }
 
         .mobile-menu-links a {
             display: block;
-            width: 100%;
             padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            color: #001E3C;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .mobile-menu-links a:hover {
             background-color: rgba(243, 112, 33, 0.1);
+            color: #F37021;
+        }
+
+        .mobile-menu-links a.cta-button {
+            background-color: #F37021;
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .mobile-menu-links a.cta-button:hover {
+            background-color: #e65d0f;
+            color: white;
         }
 
         .mobile-menu-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
             cursor: pointer;
-            padding: 0.75rem;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
             z-index: 1002;
         }
 
-        .mobile-menu-close:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+            color: #001E3C;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-close:hover svg {
+            transform: rotate(90deg);
         }
 
         .mobile-menu-overlay {
@@ -262,24 +283,33 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
             z-index: 1000;
-            backdrop-filter: blur(2px);
+            opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .mobile-menu-overlay.active {
             display: block;
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
             .desktop-menu {
                 display: none;
             }
-            .mobile-menu {
+            .hamburger {
                 display: block;
             }
-            body.menu-open {
-                overflow: hidden;
+            .sticky-header {
+                height: 60px;
+            }
+            .nav-container {
+                padding: 0 1rem;
+            }
+            .logo-img {
+                width: 120px;
+                max-height: 40px;
             }
         }
 
@@ -330,15 +360,13 @@
 
         /* Header fijo y navegación */
         .sticky-header {
-            height: 70px; /* Altura reducida del header */
+            height: 70px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: white;
             z-index: 1000;
-            display: flex;
-            align-items: center;
         }
 
         .nav-container {
@@ -347,10 +375,33 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
         }
 
+        /* Estilos para el botón hamburguesa */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger svg {
+            width: 24px;
+            height: 24px;
+            color: #001E3C;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Estilos del menú desktop */
         .desktop-menu {
-            height: 100%;
             display: flex;
             align-items: center;
             gap: 1.5rem;
@@ -358,36 +409,29 @@
 
         .nav-link {
             padding: 0.5rem 1rem;
-            display: inline-flex;
-            align-items: center;
-            height: 40px; /* Altura fija para los botones */
-            border-radius: 20px; /* Bordes redondeados */
+            font-size: 0.95rem;
+            color: #001E3C;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: #F37021;
+            background-color: rgba(243, 112, 33, 0.1);
         }
 
         .nav-link.cta-button {
             background-color: #F37021;
             color: white;
-            height: 40px;
-            padding: 0 1.5rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
         }
 
         .nav-link.cta-button:hover {
+            background-color: #e65d0f;
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .sticky-header {
-                height: 60px; /* Altura reducida en móvil */
-            }
-            .logo-img {
-                width: 120px; /* Logo más pequeño en móvil */
-                max-height: 40px;
-            }
         }
 
         /* Indicador de sección activa */
@@ -396,11 +440,67 @@
             font-weight: 600;
         }
 
-        /* Mejora de accesibilidad para elementos interactivos */
+        /* Mejoras de accesibilidad y focus */
         .nav-link:focus,
         .nav-link:focus-visible {
             outline: 2px solid #F37021;
             outline-offset: 2px;
+        }
+
+        .hamburger:focus,
+        .hamburger:focus-visible,
+        .mobile-menu-close:focus,
+        .mobile-menu-close:focus-visible {
+            outline: 2px solid #F37021;
+            outline-offset: 2px;
+        }
+
+        /* Fix para iOS Safari */
+        @supports (-webkit-touch-callout: none) {
+            .mobile-menu {
+                height: -webkit-fill-available;
+            }
+            .mobile-menu-overlay {
+                height: -webkit-fill-available;
+            }
+        }
+
+        /* Fix para el scroll en iOS */
+        html, body {
+            overflow-x: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+        /* Prevención de FOUC */
+        .no-fouc {
+            visibility: hidden;
+        }
+        
+        .fouc-ready {
+            visibility: visible;
+        }
+
+        /* Mejora de rendimiento para animaciones */
+        .mobile-menu,
+        .mobile-menu-overlay,
+        .nav-link,
+        .hamburger svg,
+        .mobile-menu-close svg {
+            will-change: transform, opacity;
+        }
+
+        /* Fix para el z-index stacking context */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 1000;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
     </style>
@@ -408,44 +508,44 @@
 <body>
 
     <header class="sticky-header shadow-md" role="banner">
-        <div class="container mx-auto nav-container">
+        <div class="nav-container">
             <a href="#" class="logo-container">
                 <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
             </a>
             
             <!-- Menú Desktop -->
-            <div class="desktop-menu">
-                <a href="#modelo-atc" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
-                <a href="#fases" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
-                <a href="#skills-camps" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Skills Camps</a>
-                <a href="#por-que-dojo" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
-                <a href="#unete" class="nav-link cta-button font-bold">Únete Ahora</a>
-            </div>
-
-            <!-- Overlay para menú móvil -->
-            <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+            <nav class="desktop-menu" role="navigation" aria-label="Navegación principal">
+                <a href="#modelo-atc" class="nav-link">El Modelo ATC</a>
+                <a href="#fases" class="nav-link">Fases</a>
+                <a href="#skills-camps" class="nav-link">Skills Camps</a>
+                <a href="#por-que-dojo" class="nav-link">¿Por qué Dojo?</a>
+                <a href="#unete" class="nav-link cta-button">Únete Ahora</a>
+            </nav>
 
             <!-- Botón Hamburguesa -->
-            <button class="hamburger md:hidden" aria-label="Menú" onclick="toggleMobileMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button class="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="mobileMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
 
+            <!-- Overlay para menú móvil -->
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
             <!-- Menú Móvil -->
-            <div class="mobile-menu" id="mobileMenu">
-                <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Cerrar menú">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
+                <button class="mobile-menu-close" aria-label="Cerrar menú">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <div class="mobile-menu-links">
-                    <a href="#modelo-atc" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">El Modelo ATC</a>
-                    <a href="#fases" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">Fases</a>
-                    <a href="#skills-camps" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">Skills Camps</a>
-                    <a href="#por-que-dojo" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">¿Por qué Dojo?</a>
-                    <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold text-center text-lg" onclick="toggleMobileMenu()">Únete Ahora</a>
-                </div>
+                <nav class="mobile-menu-links">
+                    <a href="#modelo-atc">El Modelo ATC</a>
+                    <a href="#fases">Fases</a>
+                    <a href="#skills-camps">Skills Camps</a>
+                    <a href="#por-que-dojo">¿Por qué Dojo?</a>
+                    <a href="#unete" class="cta-button">Únete Ahora</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -674,84 +774,141 @@
     </footer>
 
     <script>
-        function toggleMobileMenu() {
+        // Prevención de FOUC
+        document.documentElement.classList.add('no-fouc');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remover clase no-fouc después de que todo esté cargado
+            requestAnimationFrame(() => {
+                document.documentElement.classList.remove('no-fouc');
+                document.documentElement.classList.add('fouc-ready');
+            });
+
+            const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('mobileMenuOverlay');
-            const body = document.body;
-            
-            mobileMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            body.classList.toggle('menu-open');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
+            const closeButton = document.querySelector('.mobile-menu-close');
+            let isAnimating = false;
 
-            // Manejo de aria-expanded para accesibilidad
-            const hamburger = document.querySelector('.hamburger');
-            const isExpanded = mobileMenu.classList.contains('active');
-            hamburger.setAttribute('aria-expanded', isExpanded);
-        }
+            function toggleMobileMenu() {
+                if (isAnimating) return;
+                isAnimating = true;
 
-        // Cerrar menú móvil al hacer clic en un enlace
-        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggleMobileMenu();
-            });
-        });
+                const isOpen = mobileMenu.classList.contains('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = isOpen ? '' : 'hidden';
+                hamburger.setAttribute('aria-expanded', !isOpen);
 
-        // Cerrar menú móvil al redimensionar la ventana a desktop
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                const mobileMenu = document.getElementById('mobileMenu');
-                const overlay = document.getElementById('mobileMenuOverlay');
-                const body = document.body;
-                
-                mobileMenu.classList.remove('active');
-                overlay.classList.remove('active');
-                body.classList.remove('menu-open');
+                // Restablecer isAnimating después de la animación
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 300); // Coincide con la duración de la transición CSS
             }
-        });
 
-        // Manejo de sección activa mejorado
-        function setActiveSection() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let currentSection = '';
-            const scrollPosition = window.scrollY + 100; // Ajustado para mejor detección
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollPosition >= sectionTop && scrollPosition < (sectionTop + sectionHeight)) {
-                    currentSection = section.getAttribute('id');
+            // Manejo de teclas para accesibilidad
+            function handleEscKey(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
                 }
+            }
+
+            // Event listeners
+            hamburger.addEventListener('click', toggleMobileMenu);
+            closeButton.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', toggleMobileMenu);
+            document.addEventListener('keydown', handleEscKey);
+
+            // Prevenir scroll cuando el menú está abierto en iOS
+            mobileMenu.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+
+            // Cerrar menú al hacer click en un enlace
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    toggleMobileMenu();
+                    
+                    // Esperar a que se cierre el menú antes de navegar
+                    setTimeout(() => {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 300);
+                });
             });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === currentSection) {
-                    link.classList.add('active');
+
+            // Optimización del resize handler
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
+                    setActiveSection();
+                }, 100);
+            });
+
+            // Optimización del scroll handler
+            let scrollTimeout;
+            function optimizedScrollHandler() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(() => {
+                        setActiveSection();
+                        scrollTimeout = null;
+                    }, 100);
                 }
-            });
-        }
+            }
 
-        // Event Listeners
-        window.addEventListener('scroll', setActiveSection);
-        window.addEventListener('load', setActiveSection);
-        window.addEventListener('resize', setActiveSection);
+            // Manejo de sección activa mejorado
+            function setActiveSection() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const scrollPosition = window.scrollY + 100;
 
-        // Lazy loading para imágenes
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            if ('loading' in HTMLImageElement.prototype) {
-                images.forEach(img => {
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+
+                    if (scrollPosition >= sectionTop && scrollPosition < (sectionTop + sectionHeight)) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
                     }
                 });
-            } else {
-                // Fallback para navegadores que no soportan lazy loading
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-                document.body.appendChild(script);
+            }
+
+            // Event Listeners optimizados
+            window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+            window.addEventListener('load', setActiveSection);
+
+            // Intersection Observer para lazy loading de imágenes
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                            }
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
             }
         });
     </script>
