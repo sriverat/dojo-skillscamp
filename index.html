@@ -62,9 +62,10 @@
 
         /* Logo image styling */
         .logo-img {
-            width: 180px;
+            width: 140px; /* Reducido el ancho del logo */
             height: auto;
             object-fit: contain;
+            max-height: 50px; /* Asegura que el logo no sea más alto que el header */
         }
 
         .atc-diagram-container {
@@ -202,50 +203,83 @@
         /* Estilos para menú móvil */
         .mobile-menu {
             display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%; /* Aumentado para mejor usabilidad */
+            height: 100vh;
+            background-color: white;
+            padding: 4rem 2rem 2rem; /* Aumentado padding superior para el botón de cierre */
+            transition: right 0.3s ease-in-out;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1001; /* Asegura que esté por encima del overlay */
+            overflow-y: auto; /* Permite scroll si el contenido es muy largo */
         }
-        
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem; /* Aumentado para mejor espaciado */
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover {
+            background-color: rgba(243, 112, 33, 0.1);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .mobile-menu-close:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .desktop-menu {
                 display: none;
             }
             .mobile-menu {
                 display: block;
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background-color: white;
-                padding: 2rem;
-                transition: right 0.3s ease-in-out;
-                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-                z-index: 1000; /* Asegura que el menú esté sobre otros elementos */
             }
-            .mobile-menu.active {
-                right: 0;
-            }
-            .mobile-menu-links {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-                margin-top: 2rem;
-            }
-            .hamburger {
-                display: block;
-                cursor: pointer;
-                padding: 0.5rem;
-                z-index: 1001; /* Asegura que el botón esté sobre el menú */
-            }
-            .mobile-menu-close {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                cursor: pointer;
-                font-size: 1.5rem;
-                background-color: rgba(0, 0, 0, 0.1);
-                padding: 0.5rem;
-                border-radius: 50%;
-                z-index: 1002;
+            body.menu-open {
+                overflow: hidden;
             }
         }
 
@@ -268,45 +302,91 @@
         /* Scroll suave para la navegación */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Añadido para mejor manejo del scroll con header fijo */
         }
 
         /* Ajuste para el header fijo y scroll */
         section[id] {
-            scroll-margin-top: 160px; /* Aumentado significativamente para asegurar que el título sea visible */
+            scroll-margin-top: 80px; /* Ajustado para coincidir con la altura del header + padding */
+            padding-top: 2rem; /* Padding consistente para todas las secciones */
         }
 
         /* Contenedor de sección con padding */
         .section-container {
-            padding-top: 2rem;
+            padding-top: 1rem;
+            position: relative;
         }
 
-        /* Aseguramos que las secciones tengan suficiente espacio */
+        /* Aseguramos que las secciones tengan suficiente espacio y padding consistente */
         #modelo-atc,
         #fases,
         #skills-camps,
         #por-que-dojo,
         #unete {
             position: relative;
-            padding-top: 1rem;
+            padding-top: 2rem;
+            margin-top: -1px; /* Evita gaps entre secciones */
         }
 
-        /* Altura fija del header */
-        header.sticky-header {
-            height: 80px;
+        /* Header fijo y navegación */
+        .sticky-header {
+            height: 70px; /* Altura reducida del header */
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: white;
-            z-index: 50;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+
+        .desktop-menu {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            height: 40px; /* Altura fija para los botones */
+            border-radius: 20px; /* Bordes redondeados */
+        }
+
+        .nav-link.cta-button {
+            background-color: #F37021;
+            color: white;
+            height: 40px;
+            padding: 0 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
-            section[id] {
-                scroll-margin-top: 120px; /* Ajustado para móviles */
+            .sticky-header {
+                height: 60px; /* Altura reducida en móvil */
             }
-            .section-container {
-                padding-top: 1.5rem;
+            .logo-img {
+                width: 120px; /* Logo más pequeño en móvil */
+                max-height: 40px;
             }
         }
 
@@ -323,39 +403,23 @@
             outline-offset: 2px;
         }
 
-        /* Overlay para menú móvil */
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .mobile-menu-overlay.active {
-            display: block;
-        }
-
     </style>
 </head>
 <body>
 
-    <header class="bg-white shadow-md sticky-header" role="banner">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center" role="navigation" aria-label="Navegación principal">
+    <header class="sticky-header shadow-md" role="banner">
+        <div class="container mx-auto nav-container">
             <a href="#" class="logo-container">
                 <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
             </a>
             
             <!-- Menú Desktop -->
-            <div class="desktop-menu space-x-4">
+            <div class="desktop-menu">
                 <a href="#modelo-atc" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
                 <a href="#fases" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
                 <a href="#skills-camps" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Skills Camps</a>
                 <a href="#por-que-dojo" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
-                <a href="#unete" class="nav-link bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold">Únete Ahora</a>
+                <a href="#unete" class="nav-link cta-button font-bold">Únete Ahora</a>
             </div>
 
             <!-- Overlay para menú móvil -->
@@ -383,7 +447,7 @@
                     <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold text-center text-lg" onclick="toggleMobileMenu()">Únete Ahora</a>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
     <section class="hero-bg text-white py-20 md:py-32">
@@ -613,22 +677,50 @@
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('mobileMenuOverlay');
+            const body = document.body;
+            
             mobileMenu.classList.toggle('active');
             overlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            body.classList.toggle('menu-open');
+
+            // Manejo de aria-expanded para accesibilidad
+            const hamburger = document.querySelector('.hamburger');
+            const isExpanded = mobileMenu.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', isExpanded);
         }
 
-        // Manejo de sección activa
+        // Cerrar menú móvil al hacer clic en un enlace
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+
+        // Cerrar menú móvil al redimensionar la ventana a desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const overlay = document.getElementById('mobileMenuOverlay');
+                const body = document.body;
+                
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+
+        // Manejo de sección activa mejorado
         function setActiveSection() {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
             
             let currentSection = '';
+            const scrollPosition = window.scrollY + 100; // Ajustado para mejor detección
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - 150)) {
+                if (scrollPosition >= sectionTop && scrollPosition < (sectionTop + sectionHeight)) {
                     currentSection = section.getAttribute('id');
                 }
             });
@@ -644,8 +736,9 @@
         // Event Listeners
         window.addEventListener('scroll', setActiveSection);
         window.addEventListener('load', setActiveSection);
+        window.addEventListener('resize', setActiveSection);
 
-        // Lazy loading para imágenes no críticas
+        // Lazy loading para imágenes
         document.addEventListener('DOMContentLoaded', function() {
             const images = document.querySelectorAll('img[loading="lazy"]');
             if ('loading' in HTMLImageElement.prototype) {
