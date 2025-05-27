@@ -8,6 +8,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/images/dojo-skillscamp.jpg">
     
+    <!-- Preload de fuentes críticas -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin>
+    
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Dojo SkillCamp - Forjando el Futuro del Talento Digital">
     <meta property="og:description" content="Programa de formación digital que transforma talento en líderes tecnológicos.">
@@ -286,6 +290,35 @@
             }
         }
 
+        /* Indicador de sección activa */
+        .nav-link.active {
+            color: #F37021 !important;
+            font-weight: 600;
+        }
+
+        /* Mejora de accesibilidad para elementos interactivos */
+        .nav-link:focus,
+        .nav-link:focus-visible {
+            outline: 2px solid #F37021;
+            outline-offset: 2px;
+        }
+
+        /* Overlay para menú móvil */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -293,17 +326,20 @@
     <header class="bg-white shadow-md sticky top-0 z-50" role="banner">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center" role="navigation" aria-label="Navegación principal">
             <a href="#" class="logo-container">
-                <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img">
+                <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
             </a>
             
             <!-- Menú Desktop -->
             <div class="desktop-menu space-x-4">
-                <a href="#modelo-atc" class="dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
-                <a href="#fases" class="dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
-                <a href="#skills-camps" class="dark-navy hover:primary-orange transition duration-300 font-medium">Skills Camps</a>
-                <a href="#por-que-dojo" class="dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
-                <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold">Únete Ahora</a>
+                <a href="#modelo-atc" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
+                <a href="#fases" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
+                <a href="#skills-camps" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">Skills Camps</a>
+                <a href="#por-que-dojo" class="nav-link dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
+                <a href="#unete" class="nav-link bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold">Únete Ahora</a>
             </div>
+
+            <!-- Overlay para menú móvil -->
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
 
             <!-- Botón Hamburguesa -->
             <button class="hamburger md:hidden" aria-label="Menú" onclick="toggleMobileMenu()">
@@ -548,17 +584,53 @@
     <script>
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
             mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         }
 
-        // Cerrar el menú móvil cuando se hace clic en un enlace o fuera del menú
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.querySelector('.hamburger');
+        // Manejo de sección activa
+        function setActiveSection() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
             
-            if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target) && mobileMenu.classList.contains('active')) {
-                toggleMobileMenu();
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Event Listeners
+        window.addEventListener('scroll', setActiveSection);
+        window.addEventListener('load', setActiveSection);
+
+        // Lazy loading para imágenes no críticas
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            if ('loading' in HTMLImageElement.prototype) {
+                images.forEach(img => {
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                });
+            } else {
+                // Fallback para navegadores que no soportan lazy loading
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+                document.body.appendChild(script);
             }
         });
     </script>
