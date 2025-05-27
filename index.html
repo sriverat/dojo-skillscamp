@@ -14,7 +14,7 @@
     <meta property="og:image" content="./assets/images/dojo-skillscamp.jpg">
     <meta property="og:url" content="">
     
-    <title>Dojo SkillCamp - Forjando el Futuro del Talento Digital</title>
+    <title>Dojo SkillCamp - Impulsando el Futuro del Talento Digital</title>
     
     <!-- Estilos locales de respaldo por si falla CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.9/dist/typography.min.css">
@@ -264,6 +264,26 @@
         /* Scroll suave para la navegación */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Ajuste para el header fijo */
+        section[id] {
+            scroll-margin-top: 100px; /* Compensación para el header fijo */
+        }
+
+        /* Aseguramos que las secciones tengan suficiente espacio superior */
+        #modelo-atc,
+        #fases,
+        #skills-camps,
+        #por-que-dojo,
+        #unete {
+            padding-top: 2rem; /* Espacio adicional en la parte superior */
+        }
+
+        @media (max-width: 768px) {
+            section[id] {
+                scroll-margin-top: 80px; /* Ajuste para móviles donde el header puede ser más pequeño */
+            }
         }
 
     </style>
