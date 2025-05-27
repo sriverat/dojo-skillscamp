@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tailwind base - usando una versión específica del CDN */
+@import 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+
+/* Estilos personalizados */
+:root {
+    --primary-orange: #F37021;
+    --primary-blue: #34A8DB;
+    --dark-navy: #001E3C;
+}
+
+/* Utilidades de color personalizadas */
+.primary-orange { color: var(--primary-orange); }
+.bg-primary-orange { background-color: var(--primary-orange); }
+.primary-blue { color: var(--primary-blue); }
+.bg-primary-blue { background-color: var(--primary-blue); }
+.dark-navy { color: var(--dark-navy); }
+.bg-dark-navy { background-color: var(--dark-navy); }
+
+/* Estilos base */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FDFDFD;
+}
+
+/* Estilos de secciones */
+.hero-bg {
+    background-color: var(--dark-navy);
+}
+
+/* Estilos de tipografía */
+.logo-font {
+    font-weight: 900;
+}
+.tagline-font {
+    font-weight: 600;
+}
+
+/* Logo y navegación */
+.logo-img {
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+    max-height: 50px;
+}
+
+/* Contenedores y layouts */
+.atc-diagram-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+/* Fases ATC */
+.atc-phase {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.atc-phase:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.atc-phase h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.atc-phase p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.atc-phase .cantera-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Estilos específicos de fases */
+.phase-1 {
+    background-color: #EBF8FF;
+    border: 2px solid var(--primary-blue);
+}
+.phase-1 h3 { color: var(--primary-blue); }
+.phase-1 .cantera-tag {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.phase-2 {
+    background-color: #FFF5EB;
+    border: 2px solid var(--primary-orange);
+}
+.phase-2 h3 { color: var(--primary-orange); }
+.phase-2 .cantera-tag {
+    background-color: var(--primary-orange);
+    color: white;
+}
+
+.phase-3 {
+    background-color: #E6E9ED;
+    border: 2px solid var(--dark-navy);
+}
+.phase-3 h3 { color: var(--dark-navy); }
+.phase-3 .cantera-tag {
+    background-color: var(--dark-navy);
+    color: white;
+}
+
+/* Navegación y menú móvil */
+.sticky-header {
+    @apply fixed top-0 left-0 right-0 bg-white z-50 h-16 md:h-20 shadow-md;
+}
+
+.nav-container {
+    @apply container mx-auto px-4 h-full flex items-center justify-between;
+}
+
+.logo-img {
+    @apply w-32 md:w-40 h-auto object-contain;
+}
+
+/* Menú Desktop */
+.desktop-menu {
+    @apply hidden md:flex items-center space-x-6;
+}
+
+.nav-link {
+    @apply text-gray-700 hover:text-primary-orange transition-colors duration-200;
+}
+
+.nav-link.cta-button {
+    @apply bg-primary-orange text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105;
+}
+
+/* Botón Hamburguesa */
+.hamburger {
+    @apply md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200;
+}
+
+/* Menú Móvil */
+.mobile-menu {
+    @apply fixed top-0 right-0 w-[280px] h-screen bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out z-50;
+}
+
+.mobile-menu.active {
+    @apply translate-x-0;
+}
+
+.mobile-menu-header {
+    @apply sticky top-0 bg-white border-b border-gray-200 z-10;
+}
+
+.mobile-menu-header img {
+    @apply w-32 h-auto object-contain;
+}
+
+.mobile-menu-close {
+    @apply p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200;
+}
+
+.mobile-menu-content {
+    @apply p-4 overflow-y-auto h-[calc(100vh-4rem)] pb-safe;
+}
+
+.mobile-menu .nav-link {
+    @apply block w-full text-left py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors duration-200;
+}
+
+.mobile-menu .cta-button {
+    @apply bg-primary-orange text-white text-center py-3 px-6 rounded-full hover:bg-opacity-90 transition-all duration-200 w-full;
+}
+
+/* Overlay */
+.mobile-menu-overlay {
+    @apply transition-opacity duration-300 ease-in-out;
+}
+
+/* Mejoras de accesibilidad */
+.mobile-menu:focus-within {
+    @apply outline-none;
+}
+
+/* Soporte para notch en iOS */
+@supports(padding: max(0px)) {
+    .mobile-menu-content {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* Fix para iOS */
+@supports (-webkit-touch-callout: none) {
+    .mobile-menu {
+        height: -webkit-fill-available;
+    }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
+    .mobile-menu {
+        display: block;
+        visibility: hidden;
+    }
+    .sticky-header {
+        height: 60px;
+    }
+    .nav-container {
+        padding: 0 1rem;
+    }
+    .logo-img {
+        width: 120px;
+        max-height: 40px;
+    }
+}
+
+/* Mejoras de accesibilidad */
+:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* Estilos personalizados para el menú móvil */
+@layer components {
+  .mobile-menu {
+    @apply fixed top-0 right-0 h-screen w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out;
+  }
+  
+  .mobile-menu.active {
+    @apply translate-x-0;
+  }
+  
+  .mobile-menu-button {
+    @apply block md:hidden;
+  }
+  
+  .nav-link {
+    @apply block py-2 px-4 text-gray-700 hover:bg-gray-100;
+  }
+} 

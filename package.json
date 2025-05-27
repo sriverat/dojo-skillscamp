@@ -1,0 +1,16 @@
+{
+  "name": "dojo-landingpage",
+  "version": "1.0.0",
+  "description": "Landing page for Dojo SkillCamp",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/styles.css -o ./assets/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
+  }
+}
