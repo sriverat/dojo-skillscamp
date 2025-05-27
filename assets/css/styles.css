@@ -126,52 +126,74 @@ body {
 /* Header y Navegación */
 .sticky-header {
     @apply fixed top-0 left-0 right-0 bg-white z-50 shadow-md;
-    height: 4rem; /* 64px */
+    height: 3.5rem; /* 56px - altura más compacta para móvil */
 }
 
 @screen md {
     .sticky-header {
-        height: 5rem; /* 80px */
+        height: 4.5rem; /* 72px - altura más proporcionada para desktop */
     }
 }
 
 .nav-container {
-    @apply container mx-auto px-4 h-full flex items-center justify-between;
+    @apply container mx-auto h-full flex items-center justify-between;
+    padding: 0 1rem;
     max-width: 1280px;
 }
 
+@screen md {
+    .nav-container {
+        padding: 0 2rem;
+    }
+}
+
 .logo-container {
-    @apply flex items-center;
+    @apply flex items-center flex-shrink-0;
+    width: 120px; /* Ancho fijo para el contenedor del logo */
 }
 
 .logo-img {
-    @apply h-10 w-auto object-contain;
+    @apply h-8 w-auto object-contain;
 }
 
 @screen md {
+    .logo-container {
+        width: 140px;
+    }
     .logo-img {
-        @apply h-12;
+        @apply h-10;
     }
 }
 
 /* Menú Desktop */
 .desktop-menu {
-    @apply hidden md:flex items-center space-x-6;
+    @apply hidden md:flex items-center;
+    gap: 1.5rem;
 }
 
 .desktop-menu .nav-link {
-    @apply px-4 py-2 text-gray-700 hover:text-primary-orange transition-colors duration-200 text-base font-medium;
+    @apply px-3 py-2 text-gray-700 hover:text-primary-orange transition-colors duration-200 text-sm font-medium whitespace-nowrap;
+}
+
+@screen lg {
+    .desktop-menu {
+        gap: 2rem;
+    }
+    .desktop-menu .nav-link {
+        @apply px-4 text-base;
+    }
 }
 
 .desktop-menu .nav-link.cta-button {
-    @apply bg-primary-orange text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105;
+    @apply bg-primary-orange text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 ml-2;
 }
 
 /* Botón Hamburguesa */
 .hamburger {
-    @apply md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center;
+    @apply md:hidden flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors duration-200;
     width: 2.5rem;
     height: 2.5rem;
+    margin-left: 0.5rem;
 }
 
 .hamburger svg {
@@ -189,6 +211,7 @@ body {
 
 .mobile-menu-header {
     @apply sticky top-0 bg-white border-b border-gray-200 z-10 flex items-center justify-between p-4;
+    height: 3.5rem; /* Igual que el header principal en móvil */
 }
 
 .mobile-menu-header img {
@@ -201,7 +224,7 @@ body {
 
 .mobile-menu-content {
     @apply p-4 overflow-y-auto;
-    height: calc(100vh - 4rem);
+    height: calc(100vh - 3.5rem);
 }
 
 .mobile-menu .nav-link {
@@ -219,7 +242,7 @@ body {
 
 /* Ajustes para el contenido principal */
 main {
-    @apply pt-16 md:pt-20; /* Compensar el header fijo */
+    @apply pt-14 md:pt-[4.5rem]; /* Compensar el header fijo */
 }
 
 /* Mejoras de accesibilidad */
