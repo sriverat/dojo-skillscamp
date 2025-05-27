@@ -215,6 +215,7 @@
                 padding: 2rem;
                 transition: right 0.3s ease-in-out;
                 box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+                z-index: 1000; /* Asegura que el menú esté sobre otros elementos */
             }
             .mobile-menu.active {
                 right: 0;
@@ -229,6 +230,7 @@
                 display: block;
                 cursor: pointer;
                 padding: 0.5rem;
+                z-index: 1001; /* Asegura que el botón esté sobre el menú */
             }
             .mobile-menu-close {
                 position: absolute;
@@ -236,7 +238,32 @@
                 right: 1rem;
                 cursor: pointer;
                 font-size: 1.5rem;
+                background-color: rgba(0, 0, 0, 0.1);
+                padding: 0.5rem;
+                border-radius: 50%;
+                z-index: 1002;
             }
+        }
+
+        /* Estilos para las tarjetas de Skills Camps */
+        .skills-camp-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .skills-camp-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+
+        /* Scroll suave para la navegación */
+        html {
+            scroll-behavior: smooth;
         }
 
     </style>
@@ -380,43 +407,43 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold dark-navy mb-4">Skills <span class="primary-orange">Camps</span></h2>
                 <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    Nuestros programas de inmersión diseñados meticulosamente para el desarrollo de habilidades especializadas en programación y las tecnologías digitales. Estos entornos de aprendizaje intensivo están estructurados para potenciar tu espiral de aprendizaje continuo.
+                    Nuestros programas de inmersión diseñados meticulosamente para el desarrollo de habilidades especializadas en programación y las tecnologías digitales permiten la adopción de un enfoque de aprendizaje continuo. Estos entornos de aprendizaje intensivo están estructurados para potenciar tu espiral de aprendizaje continuo por medio de cursos acordes a las realidades del sector TI.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Programación Web -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
                     <h3 class="text-xl font-bold primary-blue mb-3">Programación Web</h3>
                     <p class="text-gray-700">Domina el desarrollo web moderno con HTML5, CSS3, JavaScript y los frameworks más demandados.</p>
                 </div>
 
                 <!-- Programación Backend -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
                     <h3 class="text-xl font-bold primary-orange mb-3">Programación Backend</h3>
                     <p class="text-gray-700">Construye servidores robustos y APIs escalables con las tecnologías más potentes del mercado.</p>
                 </div>
 
                 <!-- Ciencia de Datos -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
                     <h3 class="text-xl font-bold dark-navy mb-3">Ciencia de Datos</h3>
                     <p class="text-gray-700">Aprende a extraer conocimiento valioso de los datos usando estadística y machine learning.</p>
                 </div>
 
                 <!-- Análisis de Datos -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-blue skills-camp-card">
                     <h3 class="text-xl font-bold primary-blue mb-3">Análisis de Datos</h3>
                     <p class="text-gray-700">Transforma datos en insights accionables para la toma de decisiones empresariales.</p>
                 </div>
 
                 <!-- Ciberseguridad -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-primary-orange skills-camp-card">
                     <h3 class="text-xl font-bold primary-orange mb-3">Ciberseguridad</h3>
                     <p class="text-gray-700">Protege sistemas y datos con las últimas técnicas en seguridad informática.</p>
                 </div>
 
                 <!-- Innovación y Emprendimiento Digital -->
-                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy hover:transform hover:scale-105 transition duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-dark-navy skills-camp-card">
                     <h3 class="text-xl font-bold dark-navy mb-3">Innovación y Emprendimiento Digital</h3>
                     <p class="text-gray-700">Desarrolla las habilidades necesarias para liderar la transformación digital y crear startups exitosas.</p>
                 </div>
