@@ -195,6 +195,49 @@
             transform: translateY(-50%);
         }
 
+        /* Estilos para menú móvil */
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                padding: 2rem;
+                transition: right 0.3s ease-in-out;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            }
+            .mobile-menu.active {
+                right: 0;
+            }
+            .mobile-menu-links {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+            .mobile-menu-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+        }
 
     </style>
 </head>
@@ -205,11 +248,35 @@
             <a href="#" class="logo-container">
                 <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img">
             </a>
-            <div class="space-x-4">
+            
+            <!-- Menú Desktop -->
+            <div class="desktop-menu space-x-4">
                 <a href="#modelo-atc" class="dark-navy hover:primary-orange transition duration-300 font-medium">El Modelo ATC</a>
                 <a href="#fases" class="dark-navy hover:primary-orange transition duration-300 font-medium">Fases</a>
                 <a href="#por-que-dojo" class="dark-navy hover:primary-orange transition duration-300 font-medium">¿Por qué Dojo?</a>
                 <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold">Únete Ahora</a>
+            </div>
+
+            <!-- Botón Hamburguesa -->
+            <button class="hamburger md:hidden" aria-label="Menú" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <!-- Menú Móvil -->
+            <div class="mobile-menu" id="mobileMenu">
+                <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Cerrar menú">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="mobile-menu-links">
+                    <a href="#modelo-atc" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">El Modelo ATC</a>
+                    <a href="#fases" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">Fases</a>
+                    <a href="#por-que-dojo" class="dark-navy hover:primary-orange transition duration-300 font-medium text-lg" onclick="toggleMobileMenu()">¿Por qué Dojo?</a>
+                    <a href="#unete" class="bg-primary-orange text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300 font-bold text-center text-lg" onclick="toggleMobileMenu()">Únete Ahora</a>
+                </div>
             </div>
         </nav>
     </header>
@@ -379,6 +446,24 @@
             <p class="text-sm">&copy; 2025 Dojo SkillCamp. Todos los derechos reservados. Forjando el futuro, un skill a la vez.</p>
         </div>
     </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Cerrar el menú móvil cuando se hace clic en un enlace o fuera del menú
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target) && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    </script>
 
 </body>
 </html>
