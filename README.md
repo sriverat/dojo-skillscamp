@@ -4,7 +4,7 @@ Landing page para Dojo SkillCamp, un programa de formación digital que transfor
 
 ## 🚀 Demo
 
-La página está disponible en: [URL_DE_GITHUB_PAGES] (se actualizará después de la publicación)
+La página está disponible en: [https://sriverat.github.io/dojo-skillscamp/](https://sriverat.github.io/dojo-skillscamp/)
 
 ## ✨ Características
 

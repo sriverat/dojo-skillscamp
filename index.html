@@ -233,7 +233,7 @@
             transform: scale(1.1);
         }
 
-        /* Estilos del menú móvil mejorados */
+        /* Estilos mejorados para el menú móvil y hamburguesa */
         .mobile-menu {
             display: none;
             position: fixed;
@@ -244,7 +244,7 @@
             height: 100vh;
             height: 100dvh;
             background-color: white;
-            padding: 5rem 1.5rem 2rem;
+            padding: 4rem 1.5rem 2rem;
             transition: all 0.3s ease-in-out;
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1001;
@@ -252,15 +252,54 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .mobile-menu.active {
+        .mobile-menu-header {
+            position: absolute;
+            top: 0;
+            left: 0;
             right: 0;
-            visibility: visible;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-menu-logo {
+            width: 120px;
+            height: auto;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background-color: rgba(243, 112, 33, 0.1);
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+            color: #001E3C;
+            transition: transform 0.3s ease;
         }
 
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
+            padding-top: 1rem;
         }
 
         .mobile-menu-links a {
@@ -288,7 +327,7 @@
             background-color: #F37021;
             color: white;
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             font-weight: 600;
             justify-content: center;
             border: none;
@@ -302,58 +341,26 @@
             transform: translateY(-2px);
         }
 
-        .mobile-menu-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            padding: 0.75rem;
-            cursor: pointer;
-            z-index: 1002;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
+        .mobile-menu-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
         }
 
-        .mobile-menu-close:hover {
-            background-color: rgba(243, 112, 33, 0.1);
+        .mobile-menu-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .mobile-menu-close svg {
-            width: 24px;
-            height: 24px;
-            color: #001E3C;
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu-close:hover svg {
-            transform: rotate(90deg);
-        }
-
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            display: block;
-            opacity: 1;
+        .mobile-menu-section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            padding-left: 1.25rem;
         }
 
         @media (max-width: 768px) {
@@ -361,7 +368,15 @@
                 display: none;
             }
             .hamburger {
-                display: flex; /* Mostrar hamburguesa en móvil */
+                display: flex;
+            }
+            .mobile-menu {
+                display: block;
+                visibility: hidden;
+            }
+            .mobile-menu.active {
+                visibility: visible;
+                right: 0;
             }
             .sticky-header {
                 height: 60px;
@@ -372,37 +387,6 @@
             .logo-img {
                 width: 120px;
                 max-height: 40px;
-            }
-            .mobile-menu {
-                display: block; /* Siempre presente pero fuera de la vista */
-                visibility: hidden; /* Oculto inicialmente */
-            }
-            .hero-cta {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: auto;
-                min-width: 200px;
-                max-width: 90%;
-                white-space: normal;
-                padding: 1rem 2rem;
-                line-height: 1.3;
-                height: auto;
-                font-size: 1.1rem;
-            }
-            .main-cta {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: auto;
-                min-width: 200px;
-                max-width: 90%;
-                white-space: normal;
-                padding: 1rem 2rem;
-                line-height: 1.3;
-                height: auto;
-                font-size: 1.1rem;
-                margin: 1rem auto;
             }
         }
 
@@ -649,19 +633,30 @@
             <!-- Overlay para menú móvil -->
             <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
 
-            <!-- Menú Móvil -->
+            <!-- Menú Móvil Mejorado -->
             <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
-                <button class="mobile-menu-close" aria-label="Cerrar menú">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                <div class="mobile-menu-header">
+                    <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="mobile-menu-logo">
+                    <button class="mobile-menu-close" aria-label="Cerrar menú">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                
                 <div class="mobile-menu-links">
-                    <a href="#modelo-atc" role="menuitem">El Modelo ATC</a>
-                    <a href="#fases" role="menuitem">Fases</a>
-                    <a href="#skills-camps" role="menuitem">Skills Camps</a>
-                    <a href="#por-que-dojo" role="menuitem">¿Por qué Dojo?</a>
-                    <a href="#unete" class="cta-button" role="menuitem">Únete Ahora</a>
+                    <div class="mobile-menu-section">
+                        <div class="mobile-menu-section-title">Navegación Principal</div>
+                        <a href="#modelo-atc" role="menuitem">El Modelo ATC</a>
+                        <a href="#fases" role="menuitem">Fases</a>
+                        <a href="#skills-camps" role="menuitem">Skills Camps</a>
+                        <a href="#por-que-dojo" role="menuitem">¿Por qué Dojo?</a>
+                    </div>
+                    
+                    <div class="mobile-menu-section">
+                        <div class="mobile-menu-section-title">Acciones</div>
+                        <a href="#unete" class="cta-button" role="menuitem">Únete Ahora</a>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -906,174 +901,48 @@
             });
 
             const hamburger = document.querySelector('.hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
-            const closeButton = document.querySelector('.mobile-menu-close');
-            let isAnimating = false;
+            const body = document.body;
 
-            // Fix para el scroll en iOS
-            function lockScroll() {
-                document.body.style.overflow = 'hidden';
-                document.body.style.position = 'fixed';
-                document.body.style.width = '100%';
-                document.body.style.top = `-${window.scrollY}px`;
-            }
-
-            function unlockScroll() {
-                const scrollY = document.body.style.top;
-                document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.width = '';
-                document.body.style.top = '';
-                window.scrollTo(0, parseInt(scrollY || '0') * -1);
-            }
-
-            function toggleMobileMenu() {
-                if (isAnimating) return;
-                isAnimating = true;
-
-                const isOpen = mobileMenu.classList.contains('active');
+            function toggleMenu() {
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
                 mobileMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                
-                if (isOpen) {
-                    unlockScroll();
-                } else {
-                    lockScroll();
-                }
-
-                hamburger.setAttribute('aria-expanded', !isOpen);
-                mobileMenu.setAttribute('aria-hidden', isOpen);
-                overlay.setAttribute('aria-hidden', isOpen);
-
-                // Manejar el foco
-                if (!isOpen) {
-                    setTimeout(() => {
-                        closeButton.focus();
-                    }, 100);
-                }
-
-                // Restablecer isAnimating después de la animación
-                setTimeout(() => {
-                    isAnimating = false;
-                }, 300);
+                mobileMenuOverlay.classList.toggle('active');
+                body.style.overflow = isExpanded ? '' : 'hidden';
             }
 
-            // Manejo de teclas para accesibilidad
-            function handleEscKey(e) {
-                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
+            function closeMenu() {
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                body.style.overflow = '';
             }
 
-            // Trap focus dentro del menú móvil
-            function trapFocus(e) {
-                if (!mobileMenu.classList.contains('active')) return;
+            // Event Listeners
+            hamburger.addEventListener('click', toggleMenu);
+            mobileMenuClose.addEventListener('click', closeMenu);
+            mobileMenuOverlay.addEventListener('click', closeMenu);
 
-                const focusableElements = mobileMenu.querySelectorAll(
-                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                );
-                const firstFocusable = focusableElements[0];
-                const lastFocusable = focusableElements[focusableElements.length - 1];
-
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstFocusable) {
-                            lastFocusable.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusable) {
-                            firstFocusable.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            }
-
-            // Event listeners
-            hamburger.addEventListener('click', toggleMobileMenu);
-            closeButton.addEventListener('click', toggleMobileMenu);
-            overlay.addEventListener('click', toggleMobileMenu);
-            document.addEventListener('keydown', handleEscKey);
-            mobileMenu.addEventListener('keydown', trapFocus);
-
-            // Optimización del resize handler con debounce
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-                        toggleMobileMenu();
-                    }
-                    setActiveSection();
-                }, 100);
-            });
-
-            // Optimización del scroll handler con throttle
-            let scrollTimeout;
-            let lastScrollTime = 0;
-            const throttleDelay = 100;
-
-            function optimizedScrollHandler() {
-                const now = Date.now();
-                if (now - lastScrollTime >= throttleDelay) {
-                    setActiveSection();
-                    lastScrollTime = now;
-                }
-            }
-
-            // Event Listeners optimizados
-            window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
-            window.addEventListener('load', setActiveSection);
-
-            // Intersection Observer para lazy loading
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                                observer.unobserve(img);
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '50px 0px',
-                    threshold: 0.1
-                });
-
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            }
-
-            // Manejo de enlaces del menú móvil
+            // Cerrar menú al hacer clic en un enlace
             mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const href = link.getAttribute('href');
-                    toggleMobileMenu();
-                    
-                    // Navegar después de cerrar el menú
-                    setTimeout(() => {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            const headerOffset = 70;
-                            const elementPosition = target.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 300);
-                });
+                link.addEventListener('click', closeMenu);
             });
+
+            // Manejar tecla Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            // Prevenir scroll cuando el menú está abierto en iOS
+            mobileMenu.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
         });
     </script>
 
