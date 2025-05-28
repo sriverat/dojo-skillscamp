@@ -56,8 +56,21 @@
         <div class="nav-container">
             <!-- Logo Container -->
             <div class="logo-wrapper">
-                <a href="#" class="logo-container" aria-label="Inicio">
-                    <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
+                <a href="#" class="logo-container" aria-label="Inicio - Dojo SkillsCamp">
+                    <picture>
+                        <!-- Versión WebP para navegadores modernos -->
+                        <source srcset="./assets/images/dojo-skillscamp.webp" type="image/webp">
+                        <!-- Fallback a JPG -->
+                        <img 
+                            src="./assets/images/dojo-skillscamp.jpg" 
+                            alt="Dojo SkillsCamp Logo" 
+                            class="logo-img" 
+                            width="140" 
+                            height="40"
+                            loading="eager"
+                            decoding="async"
+                        >
+                    </picture>
                 </a>
             </div>
             

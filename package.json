@@ -12,5 +12,8 @@
     "autoprefixer": "latest",
     "postcss": "latest",
     "tailwindcss": "latest"
+  },
+  "dependencies": {
+    "sharp": "^0.34.2"
   }
 }
