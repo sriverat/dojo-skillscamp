@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu .nav-button');
+    const navLinks = document.querySelectorAll('.nav-button[href^="#"]');
+    const sections = document.querySelectorAll('section[id]');
     const body = document.body;
 
     // Validar que todos los elementos necesarios existen
@@ -15,6 +17,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Variable para controlar el estado de la animación
     let isAnimating = false;
+
+    // Función para actualizar la sección activa
+    function setActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset para mejor detección
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
 
     // Función para abrir el menú
     function openMenu() {
@@ -128,6 +150,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeMenu();
             }
         });
+
+        // Scroll suave para enlaces internos
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const headerOffset = 80; // Altura del header
+                    const elementPosition = targetSection.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    if (mobileMenu.classList.contains('active')) {
+                        closeMenu();
+                    }
+                }
+            });
+        });
+
+        // Eventos adicionales
+        window.addEventListener('scroll', setActiveSection);
+        window.addEventListener('resize', setActiveSection);
+        document.addEventListener('DOMContentLoaded', setActiveSection);
 
     } catch (error) {
         console.error('Error al inicializar el menú móvil:', error);

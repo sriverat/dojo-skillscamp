@@ -13,6 +13,9 @@
     --light-blue: #E8F4F9;
     --header-gradient-start: #F5F9FC;
     --header-gradient-end: #E8F4F9;
+    --z-header: 1000;
+    --z-menu: 1100;
+    --z-overlay: 1050;
 }
 
 /* Utilidades de color personalizadas */
@@ -128,9 +131,10 @@ body {
 
 /* Header y Navegación */
 .sticky-header {
-    @apply fixed top-0 left-0 right-0 z-50;
+    @apply fixed top-0 left-0 right-0;
+    z-index: var(--z-header);
     background: linear-gradient(to right, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
-    height: 3.9rem; /* 62.4px - altura más compacta para móvil (30% más) */
+    height: 3.9rem;
     box-shadow: 0 2px 8px rgba(52, 168, 219, 0.1);
     border-bottom: 1px solid rgba(52, 168, 219, 0.1);
 }
@@ -201,22 +205,27 @@ body {
 
 /* Estilos de los botones */
 .nav-button {
-    @apply font-medium rounded-md transition-all duration-200 whitespace-nowrap text-right;
+    @apply font-medium rounded-md transition-all duration-200 whitespace-nowrap text-right relative;
     padding: 0.45rem 0.9rem;
     color: var(--dark-navy);
     font-size: 1.05rem;
 }
 
-.nav-button:hover {
-    background-color: rgba(52, 168, 219, 0.1);
-    color: var(--primary-blue);
+.nav-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-blue);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
-@screen lg {
-    .nav-button {
-        @apply px-4 py-2;
-        font-size: 0.9375rem;
-    }
+.nav-button:hover::after,
+.nav-button.active::after {
+    width: 100%;
 }
 
 /* Botón CTA */
@@ -231,8 +240,9 @@ body {
 }
 
 @screen lg {
-    .nav-button.cta-button {
-        @apply ml-6;
+    .nav-button {
+        @apply px-4 py-2;
+        font-size: 0.9375rem;
     }
 }
 
@@ -288,14 +298,13 @@ body {
     bottom: 0;
     width: 280px;
     max-width: 100%;
-    height: 100%;
-    height: -webkit-fill-available;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--header-gradient-start);
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
-    z-index: 50;
+    z-index: var(--z-menu);
     overscroll-behavior: contain;
     box-shadow: -2px 0 8px rgba(52, 168, 219, 0.1);
 }
@@ -398,7 +407,7 @@ body {
     background-color: rgba(0, 30, 60, 0.3);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 40;
+    z-index: var(--z-overlay);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     visibility: hidden;
@@ -488,4 +497,9 @@ main {
     main {
         padding-top: 4.5rem;
     }
+}
+
+/* Fix para FOUC */
+.loading * {
+    transition: none !important;
 } 
