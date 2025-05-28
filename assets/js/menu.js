@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu .nav-button');
+    const body = document.body;
 
     // Validar que todos los elementos necesarios existen
     if (!hamburger || !mobileMenu || !mobileMenuOverlay || !mobileMenuClose) {
@@ -24,11 +25,17 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.classList.add('active');
         mobileMenuOverlay.classList.remove('hidden');
         mobileMenuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        body.classList.add('menu-open');
         hamburger.setAttribute('aria-expanded', 'true');
 
         // Asegurar que el menú móvil tenga foco para accesibilidad
         mobileMenuClose.focus();
+
+        // Prevenir el scroll del body
+        const scrollY = window.scrollY;
+        body.style.position = 'fixed';
+        body.style.top = `-${scrollY}px`;
+        body.style.width = '100%';
 
         setTimeout(() => {
             isAnimating = false;
@@ -43,8 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
         mobileMenuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        body.classList.remove('menu-open');
         hamburger.setAttribute('aria-expanded', 'false');
+
+        // Restaurar el scroll
+        const scrollY = body.style.top;
+        body.style.position = '';
+        body.style.top = '';
+        body.style.width = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
 
         // Devolver el foco al botón hamburguesa
         hamburger.focus();
@@ -92,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prevenir el scroll del body cuando el menú está abierto en iOS
         mobileMenu.addEventListener('touchmove', function(e) {
             const menuContent = e.target.closest('.mobile-menu-content');
-            if (!menuContent || menuContent.scrollHeight <= menuContent.clientHeight) {
+            if (!menuContent || (menuContent.scrollHeight <= menuContent.clientHeight && menuContent.scrollTop === 0)) {
                 e.preventDefault();
             }
         }, { passive: false });
@@ -102,10 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
-                if (window.innerWidth >= 768) { // 768px es el breakpoint de md en Tailwind
+                if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
                     closeMenu();
                 }
             }, 100);
+        });
+
+        // Manejar el refresco de la página
+        window.addEventListener('pageshow', function(e) {
+            if (e.persisted) {
+                closeMenu();
+            }
         });
 
     } catch (error) {

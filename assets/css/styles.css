@@ -10,6 +10,9 @@
     --primary-orange: #F37021;
     --primary-blue: #34A8DB;
     --dark-navy: #001E3C;
+    --light-blue: #E8F4F9;
+    --header-gradient-start: #F5F9FC;
+    --header-gradient-end: #E8F4F9;
 }
 
 /* Utilidades de color personalizadas */
@@ -126,9 +129,10 @@ body {
 /* Header y Navegación */
 .sticky-header {
     @apply fixed top-0 left-0 right-0 z-50;
-    background: linear-gradient(to right, var(--dark-navy) 0%, var(--primary-blue) 100%);
+    background: linear-gradient(to right, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
     height: 3rem; /* 48px - altura más compacta para móvil */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(52, 168, 219, 0.1);
+    border-bottom: 1px solid rgba(52, 168, 219, 0.1);
 }
 
 @screen md {
@@ -161,7 +165,7 @@ body {
 
 .logo-img {
     @apply h-7 w-auto object-contain;
-    filter: brightness(0) invert(1); /* Hace el logo blanco */
+    filter: none; /* Removemos el filtro para mostrar el logo original */
 }
 
 @screen md {
@@ -191,8 +195,14 @@ body {
 
 /* Estilos de los botones */
 .nav-button {
-    @apply px-3 py-1.5 text-sm font-medium text-white rounded-md transition-all duration-200 whitespace-nowrap hover:bg-white/10;
+    @apply px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap;
+    color: var(--dark-navy);
     font-size: 0.875rem;
+}
+
+.nav-button:hover {
+    background-color: rgba(52, 168, 219, 0.1);
+    color: var(--primary-blue);
 }
 
 @screen lg {
@@ -207,6 +217,12 @@ body {
     @apply bg-primary-orange text-white hover:bg-primary-orange/90 hover:text-white transform hover:scale-105 ml-4;
 }
 
+.nav-button.cta-button:hover {
+    color: white;
+    background-color: var(--primary-orange);
+    box-shadow: 0 4px 12px rgba(243, 112, 33, 0.2);
+}
+
 @screen lg {
     .nav-button.cta-button {
         @apply ml-6;
@@ -215,7 +231,11 @@ body {
 
 /* Botón Hamburguesa */
 .hamburger {
-    @apply md:hidden flex items-center justify-center p-2 rounded-lg hover:bg-white/10 transition-colors duration-200;
+    @apply md:hidden flex items-center justify-center p-2 rounded-lg transition-colors duration-200;
+}
+
+.hamburger:hover {
+    background-color: rgba(52, 168, 219, 0.1);
 }
 
 .hamburger-box {
@@ -225,7 +245,8 @@ body {
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
-    @apply absolute w-6 h-0.5 bg-white transition-all duration-200;
+    @apply absolute w-6 h-0.5 transition-all duration-200;
+    background-color: var(--dark-navy);
     content: '';
 }
 
@@ -264,35 +285,45 @@ body {
     height: -webkit-fill-available; /* Fix para iOS */
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--header-gradient-start);
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     z-index: 50;
     overscroll-behavior: contain;
+    box-shadow: -2px 0 8px rgba(52, 168, 219, 0.1);
 }
 
 .mobile-menu.active {
-    @apply translate-x-0;
+    transform: translateX(0);
 }
 
 .mobile-menu-header {
-    @apply sticky top-0 bg-white border-b border-gray-200 z-10 flex items-center justify-between p-4;
+    @apply sticky top-0 z-10 flex items-center justify-between p-4;
+    background-color: var(--header-gradient-start);
+    border-bottom: 1px solid rgba(52, 168, 219, 0.1);
 }
 
 .mobile-menu-title {
-    @apply text-lg font-semibold text-gray-900;
+    @apply text-lg font-semibold;
+    color: var(--dark-navy);
 }
 
 .mobile-menu-close {
-    @apply p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200;
+    @apply p-2 rounded-lg transition-colors duration-200;
+    color: var(--dark-navy);
+}
+
+.mobile-menu-close:hover {
+    background-color: rgba(52, 168, 219, 0.1);
 }
 
 .mobile-menu-content {
     flex: 1;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     padding: 1rem;
+    background-color: var(--header-gradient-end);
 }
 
 .mobile-menu-section {
@@ -301,70 +332,94 @@ body {
 
 /* Botones en menú móvil */
 .nav-buttons-mobile {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-3;
 }
 
 .nav-buttons-mobile .nav-button {
     position: relative;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    color: var(--dark-navy);
+    border-radius: 0.5rem;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-weight: 500;
 }
 
-.nav-buttons-mobile .nav-button:active {
-    background-color: var(--gray-200);
+.nav-buttons-mobile .nav-button:active,
+.nav-buttons-mobile .nav-button:hover {
+    background-color: rgba(52, 168, 219, 0.1);
+    color: var(--primary-blue);
 }
 
-.nav-button-icon {
-    @apply flex-shrink-0 text-gray-500;
-}
-
+/* Fix para el footer del menú móvil */
 .mobile-menu-footer {
     position: sticky;
     bottom: 0;
-    background-color: white;
+    background-color: var(--header-gradient-start);
     padding: 1rem;
-    border-top: 1px solid var(--gray-200);
+    border-top: 1px solid rgba(52, 168, 219, 0.1);
     z-index: 1;
 }
 
-.mobile-menu-footer .nav-button {
-    @apply flex items-center justify-center gap-2 w-full py-3 px-6 bg-primary-blue text-white rounded-lg hover:bg-primary-blue/90 transition-all duration-200 transform hover:scale-105;
+.mobile-menu-footer .nav-button.cta-button {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0.875rem 1.5rem;
+    background-color: var(--primary-orange);
+    color: white;
+    font-weight: 600;
 }
 
-/* Overlay */
+.mobile-menu-footer .nav-button.cta-button:hover,
+.mobile-menu-footer .nav-button.cta-button:active {
+    background-color: var(--primary-orange);
+    opacity: 0.9;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(243, 112, 33, 0.2);
+}
+
+/* Fix para el overlay */
 .mobile-menu-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 30, 60, 0.3);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     z-index: 40;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+    visibility: hidden;
 }
 
 .mobile-menu-overlay.active {
     opacity: 1;
+    visibility: visible;
 }
 
-/* Mejoras de accesibilidad */
-.mobile-menu:focus-within {
-    @apply outline-none ring-2 ring-primary-blue ring-opacity-50;
+/* Fix para el scroll cuando el menú está abierto */
+body.menu-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
-/* Soporte para notch en iOS */
-@supports(padding: max(0px)) {
-    .mobile-menu {
-        padding-top: max(1rem, env(safe-area-inset-top));
-        padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    }
-}
-
-/* Fix para iOS */
+/* Fix para dispositivos iOS */
 @supports (-webkit-touch-callout: none) {
     .mobile-menu {
         height: -webkit-fill-available;
+    }
+    .mobile-menu-content {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .mobile-menu-footer {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
     }
 }
 
@@ -426,85 +481,4 @@ main {
     main {
         padding-top: 4.5rem; /* 72px para desktop */
     }
-}
-
-/* Fix para el menú móvil en iOS */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 280px;
-    max-width: 100%;
-    height: 100%;
-    height: -webkit-fill-available; /* Fix para iOS */
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 50;
-    overscroll-behavior: contain;
-}
-
-.mobile-menu-content {
-    flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
-    overscroll-behavior: contain;
-    padding: 1rem;
-}
-
-/* Fix para el overlay */
-.mobile-menu-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 40;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-.mobile-menu-overlay.active {
-    opacity: 1;
-}
-
-/* Fix para el botón hamburguesa */
-.hamburger {
-    position: relative;
-    z-index: 51;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Fix para los botones del menú */
-.nav-buttons-mobile .nav-button {
-    position: relative;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.2s ease;
-}
-
-.nav-buttons-mobile .nav-button:active {
-    background-color: var(--gray-200);
-}
-
-/* Fix para el footer del menú móvil */
-.mobile-menu-footer {
-    position: sticky;
-    bottom: 0;
-    background-color: white;
-    padding: 1rem;
-    border-top: 1px solid var(--gray-200);
-    z-index: 1;
-}
-
-/* Fix para el scroll cuando el menú está abierto */
-body.menu-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
 } 
