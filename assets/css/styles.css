@@ -193,10 +193,11 @@ body {
 
 /* Contenedor de botones de navegación */
 .nav-buttons {
-    @apply hidden md:flex items-center justify-end;
+    @apply hidden md:flex items-center justify-center;
     gap: 1.2rem;
     margin-left: auto;
     width: 100%;
+    transform: translateY(-4px);
 }
 
 @screen lg {
@@ -207,10 +208,11 @@ body {
 
 /* Estilos de los botones */
 .nav-button {
-    @apply font-medium rounded-md transition-all duration-200 whitespace-nowrap text-right relative;
-    padding: 0.45rem 0.9rem;
+    @apply font-medium rounded-md transition-all duration-200 whitespace-nowrap text-center relative;
+    padding: 0.45rem 1.2rem;
     color: var(--dark-navy);
     font-size: 1.05rem;
+    margin-top: -2px;
 }
 
 .nav-button::after {
