@@ -189,6 +189,9 @@ body {
     @apply flex items-center;
     margin-left: auto;
     width: 75%;
+    display: flex;
+    align-items: center;
+    min-height: 100%;
 }
 
 /* Contenedor de botones de navegación */
@@ -197,7 +200,9 @@ body {
     gap: 1.2rem;
     margin-left: auto;
     width: 100%;
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    position: relative;
+    top: 50%;
 }
 
 @screen lg {
@@ -212,7 +217,8 @@ body {
     padding: 0.45rem 1.2rem;
     color: var(--dark-navy);
     font-size: 1.05rem;
-    margin-top: -2px;
+    position: relative;
+    top: -4px;
 }
 
 .nav-button::after {
