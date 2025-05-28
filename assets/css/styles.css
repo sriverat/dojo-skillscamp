@@ -165,27 +165,42 @@ body {
     }
 }
 
-/* Menú Desktop */
-.desktop-menu {
-    @apply hidden md:flex items-center;
-    gap: 1.5rem;
+/* Navegación Principal */
+.main-nav {
+    @apply flex items-center justify-end flex-grow ml-4;
 }
 
-.desktop-menu .nav-link {
-    @apply px-3 py-2 text-gray-700 hover:text-primary-orange transition-colors duration-200 text-sm font-medium whitespace-nowrap;
+/* Contenedor de botones de navegación */
+.nav-buttons {
+    @apply hidden md:flex items-center gap-1 bg-gray-50 p-1 rounded-lg;
 }
 
 @screen lg {
-    .desktop-menu {
-        gap: 2rem;
+    .nav-buttons {
+        @apply gap-2 p-2;
     }
-    .desktop-menu .nav-link {
+}
+
+/* Estilos de los botones */
+.nav-button {
+    @apply px-3 py-2 text-sm font-medium text-gray-700 rounded-md transition-all duration-200 whitespace-nowrap hover:bg-gray-100;
+}
+
+@screen lg {
+    .nav-button {
         @apply px-4 text-base;
     }
 }
 
-.desktop-menu .nav-link.cta-button {
-    @apply bg-primary-orange text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 ml-2;
+/* Botón CTA */
+.nav-button.cta-button {
+    @apply bg-primary-blue text-white hover:bg-primary-blue/90 hover:text-white transform hover:scale-105 ml-1;
+}
+
+@screen lg {
+    .nav-button.cta-button {
+        @apply ml-2;
+    }
 }
 
 /* Botón Hamburguesa */
@@ -193,7 +208,6 @@ body {
     @apply md:hidden flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors duration-200;
     width: 2.5rem;
     height: 2.5rem;
-    margin-left: 0.5rem;
 }
 
 .hamburger svg {
@@ -211,15 +225,7 @@ body {
 
 .mobile-menu-header {
     @apply sticky top-0 bg-white border-b border-gray-200 z-10 flex items-center justify-between p-4;
-    height: 3.5rem; /* Igual que el header principal en móvil */
-}
-
-.mobile-menu-header img {
-    @apply h-8 w-auto;
-}
-
-.mobile-menu-close {
-    @apply p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200;
+    height: 3.5rem;
 }
 
 .mobile-menu-content {
@@ -227,12 +233,17 @@ body {
     height: calc(100vh - 3.5rem);
 }
 
-.mobile-menu .nav-link {
-    @apply block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200 text-base font-medium;
+/* Botones en menú móvil */
+.nav-buttons-mobile {
+    @apply flex flex-col gap-2;
 }
 
-.mobile-menu .cta-button {
-    @apply bg-primary-orange text-white text-center py-3 px-6 rounded-full hover:bg-opacity-90 transition-all duration-200 w-full mt-4;
+.nav-buttons-mobile .nav-button {
+    @apply w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100;
+}
+
+.nav-buttons-mobile .cta-button {
+    @apply text-center mt-4;
 }
 
 /* Overlay */
