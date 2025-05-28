@@ -160,7 +160,7 @@ body {
 
 .logo-wrapper {
     @apply flex items-center;
-    width: 120px;
+    width: 270px;
     margin-right: auto;
 }
 
@@ -171,16 +171,16 @@ body {
 
 .logo-img {
     @apply w-auto object-contain;
-    height: 33.6px;
+    height: 60px;
     filter: none;
 }
 
 @screen md {
     .logo-wrapper {
-        width: 144px;
+        width: 300px;
     }
     .logo-img {
-        height: 38.4px;
+        height: 75px;
     }
 }
 
@@ -188,13 +188,15 @@ body {
 .main-nav {
     @apply flex items-center;
     margin-left: auto;
+    width: 75%;
 }
 
 /* Contenedor de botones de navegación */
 .nav-buttons {
-    @apply hidden md:flex items-center;
+    @apply hidden md:flex items-center justify-end;
     gap: 1.2rem;
-    margin-left: 2rem;
+    margin-left: auto;
+    width: 100%;
 }
 
 @screen lg {
