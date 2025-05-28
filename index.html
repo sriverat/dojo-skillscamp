@@ -54,18 +54,21 @@
 
     <header class="sticky-header" role="banner">
         <div class="nav-container">
-            <a href="#" class="logo-container" aria-label="Inicio">
-                <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
-            </a>
+            <!-- Logo Container -->
+            <div class="logo-wrapper">
+                <a href="#" class="logo-container" aria-label="Inicio">
+                    <img src="./assets/images/dojo-skillscamp.jpg" alt="Dojo SkillsCamp Logo" class="logo-img" loading="eager">
+                </a>
+            </div>
             
             <!-- Navegación Principal -->
             <nav class="main-nav" role="navigation" aria-label="Navegación principal">
                 <div class="nav-buttons">
-                    <a href="#modelo-atc" class="nav-button">El Modelo ATC</a>
+                    <a href="#modelo-atc" class="nav-button">Modelo ATC</a>
                     <a href="#fases" class="nav-button">Fases</a>
-                    <a href="#skills-camps" class="nav-button">Skills Camps</a>
-                    <a href="#por-que-dojo" class="nav-button">¿Por qué Dojo?</a>
-                    <a href="#unete" class="nav-button cta-button">Únete Ahora</a>
+                    <a href="#skills-camps" class="nav-button">SkillsCamp</a>
+                    <a href="#por-que-dojo" class="nav-button">¿Por qué Dojo Skills Camp?</a>
+                    <a href="#unete" class="nav-button cta-button">Únete ahora</a>
                 </div>
 
                 <!-- Botón Hamburguesa para móvil -->
@@ -75,9 +78,6 @@
                     </span>
                 </button>
             </nav>
-
-            <!-- Overlay del menú móvil -->
-            <div class="mobile-menu-overlay hidden" aria-hidden="true"></div>
 
             <!-- Menú Móvil -->
             <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
@@ -93,53 +93,21 @@
                 <nav class="mobile-menu-content">
                     <div class="mobile-menu-section">
                         <div class="nav-buttons-mobile">
-                            <a href="#modelo-atc" class="nav-button">
-                                <span class="nav-button-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </span>
-                                <span>El Modelo ATC</span>
-                            </a>
-                            <a href="#fases" class="nav-button">
-                                <span class="nav-button-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </span>
-                                <span>Fases</span>
-                            </a>
-                            <a href="#skills-camps" class="nav-button">
-                                <span class="nav-button-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                    </svg>
-                                </span>
-                                <span>Skills Camps</span>
-                            </a>
-                            <a href="#por-que-dojo" class="nav-button">
-                                <span class="nav-button-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </span>
-                                <span>¿Por qué Dojo?</span>
-                            </a>
+                            <a href="#modelo-atc" class="nav-button">Modelo ATC</a>
+                            <a href="#fases" class="nav-button">Fases</a>
+                            <a href="#skills-camps" class="nav-button">SkillsCamp</a>
+                            <a href="#por-que-dojo" class="nav-button">¿Por qué Dojo Skills Camp?</a>
                         </div>
                     </div>
 
                     <div class="mobile-menu-footer">
-                        <a href="#unete" class="nav-button cta-button">
-                            <span class="nav-button-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                            </span>
-                            <span>Únete Ahora</span>
-                        </a>
+                        <a href="#unete" class="nav-button cta-button">Únete ahora</a>
                     </div>
                 </nav>
             </div>
+
+            <!-- Overlay del menú móvil -->
+            <div class="mobile-menu-overlay hidden" aria-hidden="true"></div>
         </div>
     </header>
 

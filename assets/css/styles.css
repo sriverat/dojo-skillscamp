@@ -125,13 +125,15 @@ body {
 
 /* Header y Navegación */
 .sticky-header {
-    @apply fixed top-0 left-0 right-0 bg-white z-50 shadow-md;
-    height: 3.5rem; /* 56px - altura más compacta para móvil */
+    @apply fixed top-0 left-0 right-0 z-50;
+    background: linear-gradient(to right, var(--dark-navy) 0%, var(--primary-blue) 100%);
+    height: 3rem; /* 48px - altura más compacta para móvil */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @screen md {
     .sticky-header {
-        height: 4.5rem; /* 72px - altura más proporcionada para desktop */
+        height: 4rem; /* 64px - altura optimizada para desktop */
     }
 }
 
@@ -147,21 +149,27 @@ body {
     }
 }
 
+.logo-wrapper {
+    @apply flex items-center;
+    width: 100px; /* Ancho más compacto para móvil */
+}
+
 .logo-container {
     @apply flex items-center flex-shrink-0;
-    width: 120px; /* Ancho fijo para el contenedor del logo */
+    height: 100%;
 }
 
 .logo-img {
-    @apply h-8 w-auto object-contain;
+    @apply h-7 w-auto object-contain;
+    filter: brightness(0) invert(1); /* Hace el logo blanco */
 }
 
 @screen md {
-    .logo-container {
-        width: 140px;
+    .logo-wrapper {
+        width: 120px;
     }
     .logo-img {
-        @apply h-10;
+        @apply h-8;
     }
 }
 
@@ -172,40 +180,42 @@ body {
 
 /* Contenedor de botones de navegación */
 .nav-buttons {
-    @apply hidden md:flex items-center gap-1 bg-gray-50 p-1 rounded-lg;
+    @apply hidden md:flex items-center gap-3;
 }
 
 @screen lg {
     .nav-buttons {
-        @apply gap-2 p-2;
+        @apply gap-4;
     }
 }
 
 /* Estilos de los botones */
 .nav-button {
-    @apply px-3 py-2 text-sm font-medium text-gray-700 rounded-md transition-all duration-200 whitespace-nowrap hover:bg-gray-100;
+    @apply px-3 py-1.5 text-sm font-medium text-white rounded-md transition-all duration-200 whitespace-nowrap hover:bg-white/10;
+    font-size: 0.875rem;
 }
 
 @screen lg {
     .nav-button {
-        @apply px-4 text-base;
+        @apply px-4 py-2;
+        font-size: 0.9375rem;
     }
 }
 
 /* Botón CTA */
 .nav-button.cta-button {
-    @apply bg-primary-blue text-white hover:bg-primary-blue/90 hover:text-white transform hover:scale-105 ml-1;
+    @apply bg-primary-orange text-white hover:bg-primary-orange/90 hover:text-white transform hover:scale-105 ml-4;
 }
 
 @screen lg {
     .nav-button.cta-button {
-        @apply ml-2;
+        @apply ml-6;
     }
 }
 
 /* Botón Hamburguesa */
 .hamburger {
-    @apply md:hidden flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200;
+    @apply md:hidden flex items-center justify-center p-2 rounded-lg hover:bg-white/10 transition-colors duration-200;
 }
 
 .hamburger-box {
@@ -215,7 +225,7 @@ body {
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
-    @apply absolute w-6 h-0.5 bg-gray-700 transition-all duration-200;
+    @apply absolute w-6 h-0.5 bg-white transition-all duration-200;
     content: '';
 }
 
