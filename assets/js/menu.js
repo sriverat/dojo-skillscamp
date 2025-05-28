@@ -1,79 +1,114 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Verificar que los elementos existen antes de usarlos
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
-    const overlay = document.querySelector('.mobile-menu-overlay');
-    const body = document.body;
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu .nav-button');
+
+    // Validar que todos los elementos necesarios existen
+    if (!hamburger || !mobileMenu || !mobileMenuOverlay || !mobileMenuClose) {
+        console.error('Elementos necesarios del menú móvil no encontrados');
+        return;
+    }
+
+    // Variable para controlar el estado de la animación
     let isAnimating = false;
 
-    function toggleMenu(shouldOpen = null) {
+    // Función para abrir el menú
+    function openMenu() {
         if (isAnimating) return;
         isAnimating = true;
 
-        const isOpen = shouldOpen !== null ? !shouldOpen : mobileMenu.classList.contains('active');
-        
-        if (!isOpen) {
-            overlay.classList.remove('hidden');
-            // Dar tiempo al navegador para pintar el overlay antes de hacerlo visible
-            requestAnimationFrame(() => {
-                mobileMenu.classList.add('active');
-                overlay.classList.add('opacity-100');
-                hamburger.setAttribute('aria-expanded', 'true');
-                body.style.overflow = 'hidden';
-                mobileMenuClose.focus();
-            });
-        } else {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('opacity-100');
-            hamburger.setAttribute('aria-expanded', 'false');
-            body.style.overflow = '';
-            hamburger.focus();
-            
-            // Esperar a que termine la transición antes de ocultar el overlay
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-                isAnimating = false;
-            }, 300);
-            return;
-        }
+        hamburger.classList.add('active');
+        mobileMenu.classList.add('active');
+        mobileMenuOverlay.classList.remove('hidden');
+        mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        hamburger.setAttribute('aria-expanded', 'true');
 
-        isAnimating = false;
+        // Asegurar que el menú móvil tenga foco para accesibilidad
+        mobileMenuClose.focus();
+
+        setTimeout(() => {
+            isAnimating = false;
+        }, 300); // Duración de la animación
     }
 
-    function handleEscapeKey(e) {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-            toggleMenu(false);
-        }
+    // Función para cerrar el menú
+    function closeMenu() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        hamburger.setAttribute('aria-expanded', 'false');
+
+        // Devolver el foco al botón hamburguesa
+        hamburger.focus();
+
+        // Esperar a que termine la animación antes de ocultar el overlay
+        setTimeout(() => {
+            mobileMenuOverlay.classList.add('hidden');
+            isAnimating = false;
+        }, 300);
     }
 
-    // Event Listeners
-    hamburger?.addEventListener('click', () => toggleMenu());
-    mobileMenuClose?.addEventListener('click', () => toggleMenu(false));
-    overlay?.addEventListener('click', () => toggleMenu(false));
-    document.addEventListener('keydown', handleEscapeKey);
-
-    // Cerrar menú al hacer clic en un enlace
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
-    });
-
-    // Cerrar menú al redimensionar la ventana a desktop
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-                toggleMenu(false);
-            }
-        }, 100);
-    });
-
-    // Prevenir scroll cuando el menú está abierto en iOS
-    mobileMenu.addEventListener('touchmove', function(e) {
-        const target = e.target;
-        if (!target.closest('.mobile-menu-content')) {
+    // Event listeners con manejo de errores
+    try {
+        hamburger.addEventListener('click', function(e) {
             e.preventDefault();
-        }
-    }, { passive: false });
+            if (mobileMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        mobileMenuClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeMenu();
+        });
+
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+
+        // Cerrar menú al hacer clic en un enlace
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // No prevenir el comportamiento por defecto para permitir la navegación
+                closeMenu();
+            });
+        });
+
+        // Cerrar menú con la tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Prevenir el scroll del body cuando el menú está abierto en iOS
+        mobileMenu.addEventListener('touchmove', function(e) {
+            const menuContent = e.target.closest('.mobile-menu-content');
+            if (!menuContent || menuContent.scrollHeight <= menuContent.clientHeight) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Manejar cambios de orientación y redimensionamiento
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth >= 768) { // 768px es el breakpoint de md en Tailwind
+                    closeMenu();
+                }
+            }, 100);
+        });
+
+    } catch (error) {
+        console.error('Error al inicializar el menú móvil:', error);
+    }
 }); 

@@ -70,9 +70,9 @@
 
                 <!-- Botón Hamburguesa para móvil -->
                 <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
                 </button>
             </nav>
 
@@ -82,7 +82,7 @@
             <!-- Menú Móvil -->
             <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
                 <div class="mobile-menu-header">
-                    <span class="text-lg font-semibold text-gray-900">Navegación</span>
+                    <span class="mobile-menu-title">Menú de Navegación</span>
                     <button class="mobile-menu-close" aria-label="Cerrar menú">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -91,12 +91,52 @@
                 </div>
                 
                 <nav class="mobile-menu-content">
-                    <div class="nav-buttons-mobile">
-                        <a href="#modelo-atc" class="nav-button">El Modelo ATC</a>
-                        <a href="#fases" class="nav-button">Fases</a>
-                        <a href="#skills-camps" class="nav-button">Skills Camps</a>
-                        <a href="#por-que-dojo" class="nav-button">¿Por qué Dojo?</a>
-                        <a href="#unete" class="nav-button cta-button">Únete Ahora</a>
+                    <div class="mobile-menu-section">
+                        <div class="nav-buttons-mobile">
+                            <a href="#modelo-atc" class="nav-button">
+                                <span class="nav-button-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                                <span>El Modelo ATC</span>
+                            </a>
+                            <a href="#fases" class="nav-button">
+                                <span class="nav-button-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </span>
+                                <span>Fases</span>
+                            </a>
+                            <a href="#skills-camps" class="nav-button">
+                                <span class="nav-button-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                    </svg>
+                                </span>
+                                <span>Skills Camps</span>
+                            </a>
+                            <a href="#por-que-dojo" class="nav-button">
+                                <span class="nav-button-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                                <span>¿Por qué Dojo?</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mobile-menu-footer">
+                        <a href="#unete" class="nav-button cta-button">
+                            <span class="nav-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </span>
+                            <span>Únete Ahora</span>
+                        </a>
                     </div>
                 </nav>
             </div>

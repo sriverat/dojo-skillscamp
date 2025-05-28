@@ -205,18 +205,60 @@ body {
 
 /* Botón Hamburguesa */
 .hamburger {
-    @apply md:hidden flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors duration-200;
-    width: 2.5rem;
-    height: 2.5rem;
+    @apply md:hidden flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200;
 }
 
-.hamburger svg {
-    @apply w-6 h-6 text-gray-700;
+.hamburger-box {
+    @apply relative w-6 h-6 flex items-center justify-center;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    @apply absolute w-6 h-0.5 bg-gray-700 transition-all duration-200;
+    content: '';
+}
+
+.hamburger-inner::before {
+    top: -8px;
+}
+
+.hamburger-inner::after {
+    bottom: -8px;
+}
+
+/* Animación del botón hamburguesa */
+.hamburger.active .hamburger-inner {
+    transform: rotate(45deg);
+}
+
+.hamburger.active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
 }
 
 /* Menú Móvil */
 .mobile-menu {
-    @apply fixed top-0 right-0 w-[280px] h-screen bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out z-50;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 100%;
+    height: 100%;
+    height: -webkit-fill-available; /* Fix para iOS */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+    overscroll-behavior: contain;
 }
 
 .mobile-menu.active {
@@ -225,12 +267,26 @@ body {
 
 .mobile-menu-header {
     @apply sticky top-0 bg-white border-b border-gray-200 z-10 flex items-center justify-between p-4;
-    height: 3.5rem;
+}
+
+.mobile-menu-title {
+    @apply text-lg font-semibold text-gray-900;
+}
+
+.mobile-menu-close {
+    @apply p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200;
 }
 
 .mobile-menu-content {
-    @apply p-4 overflow-y-auto;
-    height: calc(100vh - 3.5rem);
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    overscroll-behavior: contain;
+    padding: 1rem;
+}
+
+.mobile-menu-section {
+    @apply px-4;
 }
 
 /* Botones en menú móvil */
@@ -239,31 +295,58 @@ body {
 }
 
 .nav-buttons-mobile .nav-button {
-    @apply w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100;
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease;
 }
 
-.nav-buttons-mobile .cta-button {
-    @apply text-center mt-4;
+.nav-buttons-mobile .nav-button:active {
+    background-color: var(--gray-200);
+}
+
+.nav-button-icon {
+    @apply flex-shrink-0 text-gray-500;
+}
+
+.mobile-menu-footer {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 1rem;
+    border-top: 1px solid var(--gray-200);
+    z-index: 1;
+}
+
+.mobile-menu-footer .nav-button {
+    @apply flex items-center justify-center gap-2 w-full py-3 px-6 bg-primary-blue text-white rounded-lg hover:bg-primary-blue/90 transition-all duration-200 transform hover:scale-105;
 }
 
 /* Overlay */
 .mobile-menu-overlay {
-    @apply fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 40;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
-/* Ajustes para el contenido principal */
-main {
-    @apply pt-14 md:pt-[4.5rem]; /* Compensar el header fijo */
+.mobile-menu-overlay.active {
+    opacity: 1;
 }
 
 /* Mejoras de accesibilidad */
 .mobile-menu:focus-within {
-    @apply outline-none;
+    @apply outline-none ring-2 ring-primary-blue ring-opacity-50;
 }
 
 /* Soporte para notch en iOS */
 @supports(padding: max(0px)) {
-    .mobile-menu-content {
+    .mobile-menu {
+        padding-top: max(1rem, env(safe-area-inset-top));
         padding-bottom: max(1rem, env(safe-area-inset-bottom));
     }
 }
@@ -322,4 +405,96 @@ main {
   .nav-link {
     @apply block py-2 px-4 text-gray-700 hover:bg-gray-100;
   }
+}
+
+/* Ajustes para el contenido principal */
+main {
+    padding-top: 3.5rem; /* 56px para móvil */
+}
+
+@screen md {
+    main {
+        padding-top: 4.5rem; /* 72px para desktop */
+    }
+}
+
+/* Fix para el menú móvil en iOS */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 100%;
+    height: 100%;
+    height: -webkit-fill-available; /* Fix para iOS */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+    overscroll-behavior: contain;
+}
+
+.mobile-menu-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    overscroll-behavior: contain;
+    padding: 1rem;
+}
+
+/* Fix para el overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 40;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+}
+
+/* Fix para el botón hamburguesa */
+.hamburger {
+    position: relative;
+    z-index: 51;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix para los botones del menú */
+.nav-buttons-mobile .nav-button {
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.nav-buttons-mobile .nav-button:active {
+    background-color: var(--gray-200);
+}
+
+/* Fix para el footer del menú móvil */
+.mobile-menu-footer {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 1rem;
+    border-top: 1px solid var(--gray-200);
+    z-index: 1;
+}
+
+/* Fix para el scroll cuando el menú está abierto */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 } 
