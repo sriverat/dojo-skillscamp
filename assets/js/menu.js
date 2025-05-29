@@ -108,15 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         });
 
-        mobileMenuOverlay.addEventListener('click', closeMenu);
-
-        // Cerrar menú al hacer clic en un enlace
+        // Cerrar menú cuando se hace clic en un enlace
         mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // No prevenir el comportamiento por defecto para permitir la navegación
+            link.addEventListener('click', () => {
                 closeMenu();
             });
         });
+
+        // Cerrar menú cuando se hace clic en el overlay
+        mobileMenuOverlay.addEventListener('click', closeMenu);
 
         // Cerrar menú con la tecla Escape
         document.addEventListener('keydown', function(e) {
@@ -183,4 +183,4 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
         console.error('Error al inicializar el menú móvil:', error);
     }
-}); 
+});
